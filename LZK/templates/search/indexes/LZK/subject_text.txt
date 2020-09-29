@@ -1,0 +1,2 @@
+{{ object.pk }}
+{{ object.name }}

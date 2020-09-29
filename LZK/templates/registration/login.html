@@ -1,0 +1,44 @@
+{% extends "LZK/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block body %}
+<div class="row">
+  <aside class="col-sm-4"></aside>
+  <aside class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <form action="." method="post">
+            <h4 class="card-title text-center mb-4 mt-1">{% trans "Sign in" %}</h4>
+            <hr>
+            {% csrf_token %}
+            {% crispy form %}
+            <!--
+              <p class="text-success text-center">Some message goes here</p>
+              {{ form.non_field_errors }}
+              {% csrf_token %}
+              <div class="form-group">
+              <div class="input-group">
+              <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+              </div>
+              <input name="" class="form-control" placeholder="Email or login" type="email">
+              </div>
+              </div>
+              <div class="form-group">
+              <div class="input-group">
+              <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+              </div>
+              <input class="form-control" placeholder="" type="password">
+              </div>
+              </div>
+            -->
+          </form>
+        </div>
+      </div> <!-- card.// -->
+  </aside>
+  <aside class="col-sm-4"></aside>
+</div>
+{% endblock %}

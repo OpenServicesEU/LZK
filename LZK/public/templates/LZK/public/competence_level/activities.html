@@ -1,0 +1,7 @@
+{% if record.activity_set.count > 0 %}
+{% for activity in record.activity_set.all %}
+<a href="{% url 'public:activity' pk=activity.pk %}">{{ activity.name }}</a>{% if not forloop.last %}, {% endif %}
+{% endfor %}
+{% else %}
+-
+{% endif %}

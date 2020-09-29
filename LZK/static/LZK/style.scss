@@ -1,0 +1,44 @@
+$dark: rgb(0,130,145);
+$light: rgb(65,178,171);
+$theme-colors: (
+  "primary": $light,
+  "danger": #ff4136,
+  "dark": $dark,
+  "light": $light
+);
+$jumbotron-color: rgb(255,255,255);
+$jumbotron-bg: rgb(0,130,145);
+body {
+  min-height: 75rem;
+  padding-top: 4.5rem;
+}
+.navbar {
+  border-bottom: 0.25rem solid $dark;
+}
+// Bootstrap v4 Specific Tweaks
+.alert.mdi::before { margin: 0 3px 0 -3px; }
+.btn.mdi:not(:empty)::before{ margin: 0 3px 0 -3px; }
+.breadcrumb-item {
+  a.mdi, span.mdi {
+    &::before { margin: 0 2px 0 -2px }
+  }
+}
+.dropdown-item.mdi::before { margin: 0 8px 0 -10px; }
+.list-group-item.mdi::before { margin: 0 6px 0 -6px; }
+.modal-title.mdi::before { margin: 0 4px 0 0; }
+.nav-link.mdi::before { margin: 0 4px 0 -4px; }
+.navbar-brand {
+  font-family: "Corporate A";
+  &.mdi::before { margin: 0 4px 0 0; }
+}
+.popover-title.mdi::before { margin: 0 4px 0 -4px; }
+// Collapse Demo
+.btn.mdi-chevron-up.collapsed::before {
+  content: '\f140';
+}
+span.asteriskField {
+  display: none;
+}
+@import "fonts.scss";
+@import "bootstrap/bootstrap.scss";
+//@import "fonts-fork-awesome/scss/fork-awesome.scss";

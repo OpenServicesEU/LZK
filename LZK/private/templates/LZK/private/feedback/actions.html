@@ -1,0 +1,5 @@
+{% load i18n %}
+<a href="{% url "private:feedback-detail" pk=record.pk %}" class="btn btn-primary btn-sm">
+  <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+  {% trans "View" %}
+</a>

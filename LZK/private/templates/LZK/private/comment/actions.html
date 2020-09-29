@@ -1,0 +1,15 @@
+{% load i18n %}
+<form method="POST" action="" class="d-inline">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-primary btn-sm">
+    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+    {% trans "Accept" %}
+  </button>
+</form>
+<form method="POST" action="" class="d-inline">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-warning btn-sm">
+    <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+    {% trans "Discard" %}
+  </button>
+</form>

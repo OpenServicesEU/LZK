@@ -1,0 +1,19 @@
+{% load i18n %}
+<li class="nav-item">
+  <a class="nav-link" href="{% url "public:objective-subject" %}">
+    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+    {% trans "Objectives" %}
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url "public:symptom-subject" %}">
+    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+    {% trans "Symptoms" %}
+  </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="{% url "public:competence_level" %}">
+    <i class="fa fa-graduation-cap" aria-hidden="true"></i>
+    {% trans "Competence levels" %}
+  </a>
+</li>

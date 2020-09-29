@@ -1,0 +1,282 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-28 08:11+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: LZK/admin.py:8 LZK/apps.py:7
+msgid "Lernzielkatalog"
+msgstr ""
+
+#: LZK/admin.py:9 LZK/admin.py:10 LZK/templates/LZK/content.html:43
+msgid "Administration"
+msgstr "Administration"
+
+#: LZK/models.py:24 LZK/models.py:40 LZK/models.py:50
+msgid "University"
+msgstr "Universität"
+
+#: LZK/models.py:32 LZK/models.py:58 LZK/models.py:73 LZK/models.py:88
+#: LZK/models.py:103 LZK/models.py:118 LZK/models.py:190 LZK/models.py:203
+#: LZK/models.py:219
+msgid "Name"
+msgstr "Name"
+
+#: LZK/models.py:41
+msgid "Universities"
+msgstr "Universitäten"
+
+#: LZK/models.py:57 LZK/models.py:72 LZK/models.py:87 LZK/models.py:117
+#: LZK/models.py:189
+msgid "Acronym"
+msgstr "Akronym"
+
+#: LZK/models.py:63
+msgid "Level"
+msgstr "Level"
+
+#: LZK/models.py:64
+msgid "Levels"
+msgstr "Levels"
+
+#: LZK/models.py:78
+msgid "Subject"
+msgstr "Fach"
+
+#: LZK/models.py:79
+msgid "Subjects"
+msgstr "Fächer"
+
+#: LZK/models.py:93
+msgid "System"
+msgstr "System"
+
+#: LZK/models.py:94
+msgid "Systems"
+msgstr "Systeme"
+
+#: LZK/models.py:108
+msgid "UFID"
+msgstr "UFID"
+
+#: LZK/models.py:109
+msgid "UFIDs"
+msgstr "UFIDs"
+
+#: LZK/models.py:123
+msgid "Study field"
+msgstr ""
+
+#: LZK/models.py:124
+msgid "Study fields"
+msgstr ""
+
+#: LZK/models.py:132 LZK/models.py:147
+msgid "Educational objective"
+msgstr "Lernziel"
+
+#: LZK/models.py:138
+msgid "Module track"
+msgstr "Modul-Track"
+
+#: LZK/models.py:139
+msgid "module tracks"
+msgstr "Modul-Tracks"
+
+#: LZK/models.py:149
+msgid "Depth"
+msgstr "Tiefe"
+
+#: LZK/models.py:153
+msgid "Subject related"
+msgstr "Fachverwandt"
+
+#: LZK/models.py:165
+msgid "Objective"
+msgstr "Lernziel"
+
+#: LZK/models.py:166
+msgid "Objectives"
+msgstr "Lernziele"
+
+#: LZK/models.py:174 LZK/models.py:180
+msgid "Symptom"
+msgstr "Symptom"
+
+#: LZK/models.py:181
+msgid "Symptoms"
+msgstr "Symptome"
+
+#: LZK/models.py:191
+msgid "Short"
+msgstr "Kursbezeichnung"
+
+#: LZK/models.py:195
+msgid "Competence level"
+msgstr "Kompetenzstufe"
+
+#: LZK/models.py:196
+msgid "Competence levels"
+msgstr "Kompetenzstufen"
+
+#: LZK/models.py:209
+msgid "Activity"
+msgstr "Tätigkeit"
+
+#: LZK/models.py:210
+msgid "Activities"
+msgstr "Tätigkeiten"
+
+#: LZK/models.py:225
+msgid "Skill"
+msgstr "Fertigkeit"
+
+#: LZK/models.py:226
+msgid "Skills"
+msgstr "Fertigkeiten"
+
+#: LZK/models.py:239
+msgid "Feedback"
+msgstr "Rückmeldung"
+
+#: LZK/models.py:240
+msgid "Feedbacks"
+msgstr "Rückmeldungen"
+
+#: LZK/models.py:262
+msgid "Comment"
+msgstr "Anmerkung"
+
+#: LZK/models.py:263
+msgid "Comments"
+msgstr "Anmerkungen"
+
+#: LZK/models.py:276
+msgid "Slide"
+msgstr "Slide"
+
+#: LZK/models.py:277
+msgid "Slides"
+msgstr "Slides"
+
+#: LZK/models.py:290 LZK/models.py:291
+msgid "News"
+msgstr "Ankündigungen"
+
+#: LZK/settings.py:149
+msgid "German"
+msgstr ""
+
+#: LZK/settings.py:150
+msgid "English"
+msgstr ""
+
+#: LZK/templates/LZK/base.html:16
+msgid "Lernzielkatalog Medizin"
+msgstr ""
+
+#: LZK/templates/LZK/content.html:8
+msgid "Lernzielkatalog Österreich"
+msgstr ""
+
+#: LZK/templates/LZK/content.html:26
+msgid "Suche"
+msgstr ""
+
+#: LZK/templates/LZK/content.html:48
+msgid "Logout"
+msgstr "Abmelden"
+
+#: LZK/templates/LZK/content.html:55
+msgid "Login"
+msgstr "Anmelden"
+
+#: LZK/templates/LZK/table.html:66
+msgid "previous"
+msgstr ""
+
+#: LZK/templates/LZK/table.html:86
+msgid "next"
+msgstr ""
+
+#: LZK/templates/registration/login.html:13
+msgid "Sign in"
+msgstr "Anmelden"
+
+#: LZK/validators.py:31
+#, python-format
+msgid ""
+"Extension '%(extension)s' not allowed. Allowed extensions are: "
+"'%(extensions)s.'"
+msgstr ""
+
+#: LZK/validators.py:34
+#, python-format
+msgid ""
+"MIME type '%(mimetype)s' is not valid. Allowed types are: %(mimetypes)s."
+msgstr ""
+
+#: LZK/validators.py:95
+#, python-brace-format
+msgid "Document does not contain a sheet named {s}."
+msgstr ""
+
+#: LZK/validators.py:100
+msgid "File is no a valid XLS document."
+msgstr ""
+
+#~ msgid "Actions"
+#~ msgstr "Aktionen"
+
+#~ msgid "Accept"
+#~ msgstr "Annehmen"
+
+#~ msgid "Discard"
+#~ msgstr "Verwerfen"
+
+#~ msgid "View"
+#~ msgstr "Anzeigen"
+
+#~ msgid "Create new request for feedback"
+#~ msgstr "Neue Anfrage für Rückmeldungen erstellen"
+
+#~ msgid "Cancel"
+#~ msgstr "Abbrechen"
+
+#~ msgid "Back"
+#~ msgstr "Zurück"
+
+#~ msgid "No comments have been created yet."
+#~ msgstr "Es wurden noch keine Anmerkungen erfasst."
+
+#~ msgid "Create"
+#~ msgstr "Erstellen"
+
+#~ msgid "Show filters"
+#~ msgstr "Filter anzeigen"
+
+#~ msgid "No requests for feedback have been created."
+#~ msgstr "Es wurden noch keine Anfragen für Rückmeldungen erstellt."
+
+#~ msgid "Excel import"
+#~ msgstr "Excel Import"
+
+#~ msgid "No objectives have been defined yet."
+#~ msgstr "Es wurden noch keine Lernziele festgelegt."
+
+#~ msgid "No subjects were found."
+#~ msgstr "Es wurden keine Fächer gefunden."

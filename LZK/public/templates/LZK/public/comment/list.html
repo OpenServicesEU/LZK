@@ -1,0 +1,14 @@
+{% extends "LZK/content.html" %}
+
+{% load i18n %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+<main role="main" class="container">
+<section class="row">
+  <h1>
+    {% trans "Ojectives" %}
+  </h1>
+</section>
+{% render_table table %}
+{% endblock %}

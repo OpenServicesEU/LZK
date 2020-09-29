@@ -1,0 +1,7 @@
+{% if record.levels.count > 0 %}
+{% for level in record.levels.all %}
+<span data-toggle="tooltip" data-placement="top" title="{{ level.name }}">{{ level.pk }}</span>{% if not forloop.last %}, {% endif %}
+{% endfor %}
+{% else %}
+-
+{% endif %}

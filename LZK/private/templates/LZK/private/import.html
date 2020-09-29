@@ -1,0 +1,22 @@
+{% extends "LZK/content.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<main role="main" class="container">
+<h1>Import Excel data</h1>
+    <div class="alert alert-info" role="alert">
+The following sheets are required for to conduct an import:
+    </div>
+<ul class="list-group">
+  {% for sheet in sheets %}
+  <li class="list-group-item">{{ sheet }}</li>
+  {% endfor %}
+</ul>
+<div class="card">
+  <div class="card-body">
+    {% crispy form %}
+  </div>
+</div>
+</main>
+{% endblock %}

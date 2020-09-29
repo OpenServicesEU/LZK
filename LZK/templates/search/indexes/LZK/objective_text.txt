@@ -1,0 +1,7 @@
+{{ object.name }}
+{% for level in object.levels.all %}
+{{ level.name }}
+{% endfor %}
+{% for subject in object.subjects.all %}
+{{ subject.name }}
+{% endfor %}

@@ -1,0 +1,11 @@
+{% load i18n %}
+<a class="dropdown-item" href="{% url "private:feedback-list" %}">
+  <i class="fa fa-commenting-o" aria-hidden="true"></i>
+  {% trans "Feedback" %}
+</a>
+{% if user.is_superuser %}
+<a class="dropdown-item" href="{% url "private:import" %}">
+  <i class="fa fa-file-excel-o" aria-hidden="true"></i>
+  {% trans "Excel import" %}
+</a>
+{% endif %}
