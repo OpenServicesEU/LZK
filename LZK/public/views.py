@@ -1,4 +1,5 @@
 import logging
+from django.db.models import Count
 from haystack.generic_views import SearchView as BaseSearchView
 from django.db.models import Q
 from django_filters.views import FilterView, FilterMixin
@@ -74,10 +75,13 @@ class SymptomSubjectDetailView(SingleTableMixin, FilterMixin, DetailView):
         return self.object.objective_set.exclude(depth=None)#.filter(public=True)
 
 
-class CompetenceLevelView(SingleTableMixin, ListView):
+class CompetenceLevelView(ListView):
     model = models.CompetenceLevel
-    table_class = tables.CompetenceLevelTable
     template_name = "LZK/public/competence_level/list.html"
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.annotate(activity_count=Count('activity')).filter(activity_count__gt=0)
 
 
 class ActivityView(SingleTableMixin, FilterMixin, DetailView):
