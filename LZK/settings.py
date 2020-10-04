@@ -14,6 +14,7 @@ import os
 import saml2
 import saml2.attributemaps
 import saml2.saml
+from django.urls import reverse_lazy as reverse
 from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -173,8 +174,8 @@ HAYSTACK_SIGNAL_PROCESSOR = 'LZK.haystack.SignalProcessor'
 
 COMPRESS_PRECOMPILERS = [("text/x-scss", "LZK.compressor.DjangoSassCompiler")]
 
-LOGIN_URL = "login"
-LOGIN_REDIRECT_URL = "private:index"
+LOGIN_URL = reverse("login")
+LOGIN_REDIRECT_URL = reverse("private:index")
 
 SAML_CREATE_UNKNOWN_USER = True
 SAML_ATTRIBUTE_MAPPING = {"uid": ("username",)}
