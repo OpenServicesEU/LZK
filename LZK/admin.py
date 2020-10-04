@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from ordered_model.admin import OrderedModelAdmin
+from reversion.admin import VersionAdmin
 from . import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -21,12 +22,12 @@ class UserAdmin(BaseUserAdmin):
 
 
 @admin.register(models.Level)
-class LevelAdmin(admin.ModelAdmin):
+class LevelAdmin(VersionAdmin):
     pass
 
 
 @admin.register(models.Subject)
-class SubjectAdmin(admin.ModelAdmin):
+class SubjectAdmin(VersionAdmin):
     pass
 
 
@@ -35,52 +36,52 @@ class ContactInline(admin.TabularInline):
 
 
 @admin.register(models.University)
-class UniversityAdmin(admin.ModelAdmin):
+class UniversityAdmin(VersionAdmin):
     inlines = (ContactInline,)
 
 
 @admin.register(models.System)
-class SystemAdmin(admin.ModelAdmin):
+class SystemAdmin(VersionAdmin):
     pass
 
 
 @admin.register(models.UFID)
-class UFIDAdmin(admin.ModelAdmin):
+class UFIDAdmin(VersionAdmin):
     pass
 
 
 @admin.register(models.StudyField)
-class StudyFieldAdmin(admin.ModelAdmin):
+class StudyFieldAdmin(VersionAdmin):
     pass
 
 
 @admin.register(models.ModuleTrack)
-class ModuleTrackAdmin(admin.ModelAdmin):
+class ModuleTrackAdmin(VersionAdmin):
     pass
 
 
 @admin.register(models.Objective)
-class ObjectiveAdmin(admin.ModelAdmin):
+class ObjectiveAdmin(VersionAdmin):
     pass
 
 
 @admin.register(models.CompetenceLevel)
-class CompetenceLevelAdmin(admin.ModelAdmin):
+class CompetenceLevelAdmin(VersionAdmin):
     pass
 
 
 @admin.register(models.Activity)
-class ActivityAdmin(admin.ModelAdmin):
+class ActivityAdmin(VersionAdmin):
     pass
 
 
 @admin.register(models.Skill)
-class SkillAdmin(admin.ModelAdmin):
+class SkillAdmin(VersionAdmin):
     pass
 
 
 @admin.register(models.Symptom)
-class SymptomAdmin(admin.ModelAdmin):
+class SymptomAdmin(VersionAdmin):
     pass
 
 
