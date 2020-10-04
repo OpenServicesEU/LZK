@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-28 08:12+0000\n"
+"POT-Creation-Date: 2020-10-04 21:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,35 +18,68 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: apps.py:10
+#: LZK/private/apps.py:10
 msgid "Lernzielkatalog (Private)"
 msgstr ""
 
-#: tables.py:9 tables.py:24
+#: LZK/private/tables.py:9 LZK/private/tables.py:24
 msgid "Actions"
 msgstr "Aktionen"
 
-#: templates/LZK/private/comment/actions.html:6
+#: LZK/private/templates/LZK/private/comment/actions.html:6
 msgid "Accept"
 msgstr "Annehmen"
 
-#: templates/LZK/private/comment/actions.html:13
+#: LZK/private/templates/LZK/private/comment/actions.html:13
 msgid "Discard"
 msgstr "Verwerfen"
 
-#: templates/LZK/private/feedback/actions.html:4
+#: LZK/private/templates/LZK/private/email/feedback.html:339
+#, python-format
+msgid ""
+"\n"
+"    Request for feedback on %(subject)s\n"
+"    "
+msgstr ""
+
+#: LZK/private/templates/LZK/private/email/feedback.html:360
+msgid ""
+"\n"
+"                        Sometimes you just want to send a simple HTML email "
+"with a simple design and clear call to action. This is it.\n"
+"                        "
+msgstr ""
+
+#: LZK/private/templates/LZK/private/email/feedback.html:373
+#, python-format
+msgid ""
+"\n"
+"                                          Open feedback submission for "
+"%(subject)s\n"
+"                                          "
+msgstr ""
+
+#: LZK/private/templates/LZK/private/email/feedback.html:386
+msgid ""
+"\n"
+"                        This is a really simple email template. Its sole "
+"purpose is to get the recipient to click the button with no distractions.\n"
+"                        "
+msgstr ""
+
+#: LZK/private/templates/LZK/private/feedback/actions.html:4
 msgid "View"
 msgstr "Anzeigen"
 
-#: templates/LZK/private/feedback/create.html:11
+#: LZK/private/templates/LZK/private/feedback/create.html:11
 msgid "Create new request for feedback"
 msgstr "Neue Anfrage für Anmerkungen erstellen"
 
-#: templates/LZK/private/feedback/create.html:18
+#: LZK/private/templates/LZK/private/feedback/create.html:18
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: templates/LZK/private/feedback/detail.html:11
+#: LZK/private/templates/LZK/private/feedback/detail.html:11
 #, python-format
 msgid ""
 "\n"
@@ -54,34 +87,35 @@ msgid ""
 "      "
 msgstr ""
 
-#: templates/LZK/private/feedback/detail.html:20
+#: LZK/private/templates/LZK/private/feedback/detail.html:20
 msgid "Back"
 msgstr "Zurück"
 
-#: templates/LZK/private/feedback/detail.html:30
+#: LZK/private/templates/LZK/private/feedback/detail.html:30
 msgid "No comments have been created yet."
 msgstr "Es wurden noch keine Anmerkungen erfasst"
 
-#: templates/LZK/private/feedback/list.html:12 templates/LZK/private/nav.html:4
+#: LZK/private/templates/LZK/private/feedback/list.html:12
+#: LZK/private/templates/LZK/private/nav.html:5
 msgid "Feedback"
 msgstr "Rückmeldung"
 
-#: templates/LZK/private/feedback/list.html:19
+#: LZK/private/templates/LZK/private/feedback/list.html:19
 msgid "Create"
 msgstr "Erstellen"
 
-#: templates/LZK/private/feedback/list.html:31
+#: LZK/private/templates/LZK/private/feedback/list.html:31
 msgid "Show filters"
 msgstr "Filter anzeigen"
 
-#: templates/LZK/private/feedback/list.html:49
+#: LZK/private/templates/LZK/private/feedback/list.html:49
 msgid "No requests for feedback have been created."
 msgstr "Es wurden noch keine Anfragen für Anmerkungen erfasst"
 
-#: templates/LZK/private/nav.html:9
+#: LZK/private/templates/LZK/private/nav.html:11
 msgid "Excel import"
 msgstr "Excel Import"
 
-#: views.py:328
+#: LZK/private/views.py:330
 msgid "LZK: Request for feedback"
-msgstr ""
+msgstr "LZK: Anfrage für Rückmeldung"
