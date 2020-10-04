@@ -1,7 +1,7 @@
-from . import models
+from django.conf import settings
 
 
-def navigation(request):
+def login_url(request):
     return {
-        "subjects": models.Subject.objects.all(),
+        "login_url": settings.LOGIN_URL,
     }
