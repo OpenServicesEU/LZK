@@ -196,7 +196,7 @@ class CompetenceLevel(OrderedModel):
         verbose_name_plural = _("Competence levels")
 
     def __str__(self):
-        return self.name
+        return self.short or self.name
 
 
 class Activity(models.Model):
