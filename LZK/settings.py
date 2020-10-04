@@ -178,6 +178,7 @@ COMPRESS_PRECOMPILERS = [("text/x-scss", "LZK.compressor.DjangoSassCompiler")]
 
 LOGIN_URL = reverse("login")
 LOGIN_REDIRECT_URL = reverse("private:index")
+LOGOUT_REDIRECT_URL = reverse("public:index")
 
 SAML_CREATE_UNKNOWN_USER = True
 SAML_ATTRIBUTE_MAPPING = {
