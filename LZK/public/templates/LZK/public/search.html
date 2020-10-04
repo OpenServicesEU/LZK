@@ -5,7 +5,7 @@
 {% block content %}
 <main role="main" class="container">
 <section class="row">
-  <h1>
+  <h1 class="col-md">
     {% blocktrans with count=paginator.count query=query %}
     {{ count }} results for "{{ query}}"
     {% endblocktrans %}
