@@ -17,13 +17,13 @@ class ObjectiveCommentTable(tables.Table):
 
 
 class ObjectiveSubjectTable(tables.Table):
-    pk = tables.Column(
+    name = tables.Column(
         linkify=("public:objective-subject-detail", {"pk": tables.A("pk")})
     )
 
     class Meta:
         model = models.Subject
-        fields = ("pk", "name",)
+        fields = ("name", "id")
 
 
 class ObjectiveTable(tables.Table):
@@ -44,13 +44,13 @@ class ObjectiveTable(tables.Table):
 
 
 class SymptomSubjectTable(tables.Table):
-    pk = tables.Column(
+    name = tables.Column(
         linkify=("public:symptom-subject-detail", {"pk": tables.A("pk")})
     )
 
     class Meta:
         model = models.Subject
-        fields = ("pk", "name",)
+        fields = ("name", "id")
 
 
 class SymptomTable(tables.Table):

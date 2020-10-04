@@ -33,7 +33,7 @@ class ObjectiveSubjectListView(SingleTableMixin, FilterView):
     table_class = tables.ObjectiveSubjectTable
     template_name = "LZK/public/objective/subject.html"
     filterset_class = filters.SubjectFilter
-    paginate_by = 15
+    paginate_by = 10
 
     def get_queryset(self):
         qs = super().get_queryset()
