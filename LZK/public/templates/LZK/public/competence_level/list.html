@@ -1,29 +1,39 @@
 {% extends "LZK/content.html" %}
 
 {% load i18n %}
-{% load render_table from django_tables2 %}
 
 {% block content %}
 <main role="main" class="container">
 <section class="row">
   <h1 class="col-md">
-    {{ object }}
+    {% trans "Competence levels" %}
   </h1>
-  <div class="col-md-4">
-    <div class="btn-group float-right mt-2" role="group">
-      <a class="btn btn-secondary btn-md" href="{% url "public:objective-subject" %}">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-        {% trans "Back" %}
-      </a>
+</section>
+{% if object_list.count > 0 %}
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+  {% for object in object_list %}
+  <div class="col mb-4">
+    <div class="card h-100">
+      <div class="card-header">
+        {{ object.short }}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ object.name }}</h5>
+        <p class="card-text">{{ object.description }}</p>
+      </div>
+      <div class="card-footer">
+        {% for activity in object.activity_set.all %}
+        <a href="{% url 'public:activity' pk=activity.pk %}" class="btn btn-primary btn-block">{{ activity.name }}</a>
+        {% endfor %}
+      </div>
     </div>
   </div>
-</section>
-{% if table.data|length > 0 %}
-{% render_table table %}
+  {% endfor %}
+</div>
 {% else %}
 <div class="alert alert-primary" role="alert">
   <i class="fa fa-info-circle" aria-hidden="true"></i>
-  {% trans "No objectives have been defined yet." %}
+  {% trans "No competence levels have been defined yet." %}
 </div>
 {% endif %}
 </main>
