@@ -67,6 +67,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "djangosaml2.middleware.SamlSessionMiddleware",
 ]
 
 ROOT_URLCONF = "LZK.urls"
@@ -178,8 +179,14 @@ LOGIN_URL = reverse("login")
 LOGIN_REDIRECT_URL = reverse("private:index")
 
 SAML_CREATE_UNKNOWN_USER = True
-SAML_ATTRIBUTE_MAPPING = {"uid": ("username",)}
+SAML_ATTRIBUTE_MAPPING = {
+    "uid": ("username",),
+    'mail': ('email', ),
+    'cn': ('first_name', ),
+    'sn': ('last_name', ),
+}
 SAML_LOGOUT_REQUEST_PREFERRED_BINDING = saml2.BINDING_HTTP_POST
+SAML_IGNORE_LOGOUT_ERRORS = True
 SAML_CONFIG = {
     # full path to the xmlsec1 binary programm
     "xmlsec_binary": "/usr/bin/xmlsec1",
@@ -275,6 +282,7 @@ AUTHENTICATION_BACKENDS = (
     "django.contrib.auth.backends.ModelBackend",
     "djangosaml2.backends.Saml2Backend",
 )
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 DJANGO_TABLES2_TEMPLATE = "LZK/table.html"
