@@ -16,6 +16,7 @@ from django.template import Context
 from django.views.generic import TemplateView, FormView
 from django.views.generic import ListView, CreateView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.utils.translation import gettext_lazy as _
 from braces.views import SuperuserRequiredMixin
 
@@ -307,11 +308,12 @@ class ListFeedbackView(
         return helper
 
 
-class CreateFeedbackView(LoginRequiredMixin, CreateView):
+class CreateFeedbackView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = models.Feedback
     form_class = forms.FeedbackForm
     template_name = "LZK/private/feedback/create.html"
     success_url = reverse("private:feedback-list")
+    permission_required = 'LZK.add_feedback'
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -335,10 +337,11 @@ class CreateFeedbackView(LoginRequiredMixin, CreateView):
         return response
 
 
-class DetailFeedbackView(LoginRequiredMixin, SingleTableMixin, DetailView):
+class DetailFeedbackView(LoginRequiredMixin, PermissionRequiredMixin, SingleTableMixin, DetailView):
     model = models.Feedback
     template_name = "LZK/private/feedback/detail.html"
     table_class = tables.CommentTable
+    permission_required = 'LZK.view_feedback'
 
     def get_table_data(self):
         return self.object.comment_set.all()
