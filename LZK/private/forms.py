@@ -1,11 +1,13 @@
+from crispy_forms.bootstrap import StrictButton
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Div, Field, Layout
 from django import forms
 from django.urls import reverse_lazy as reverse
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Div, Field
-from crispy_forms.bootstrap import StrictButton
 
-from ..validators import XlsxFileValidator, FileValidator
+from LZK.layout import IconButton
+
 from .. import models
+from ..validators import FileValidator, XlsxFileValidator
 from .conf import settings
 
 
@@ -37,7 +39,12 @@ class ImportForm(forms.Form):
     helper.layout = Layout(
         Field("file"),
         Div(
-            StrictButton("Import", css_class="btn-primary btn-block", type="submit"),
+            IconButton(
+                "fa fa-upload",
+                "Import",
+                css_class="btn-primary btn-block",
+                type="submit",
+            ),
             css_class="form-group",
         ),
     )
@@ -48,7 +55,8 @@ class FeedbackForm(forms.ModelForm):
         model = models.Feedback
         fields = (
             "university",
-            "subject",
+            "subjects",
+            "activities",
         )
 
     helper = FormHelper()
@@ -58,9 +66,11 @@ class FeedbackForm(forms.ModelForm):
     helper.html5_required = True
     helper.layout = Layout(
         Field("university"),
-        Field("subject"),
+        Field("subjects"),
+        Field("activities"),
         Div(
-            StrictButton(
+            IconButton(
+                "fa fa-paper-plane-o",
                 "Send request for feedback",
                 css_class="btn-primary btn-block",
                 type="submit",

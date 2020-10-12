@@ -1,5 +1,6 @@
 {{ contact.salutation }},
 
-Bitte öffnen Sie die folgende Adresse in Ihrem Webbrowser um ein Kommentar zu den Lernzeilen des Bereichs {{ object.subject }} zu verfassen:
+{% for text in texts %}{{ text.body.raw }}
+{% endfor %}
 
-{{ request.scheme }}://{{ request.get_host }}{% url "public:comment" %}?token={{ object.secret }}
+{{ request.scheme }}://{{ request.get_host }}{% url "feedback" %}?token={{ object.secret }}

@@ -1,0 +1,21 @@
+{% extends "LZK/content.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<main role="main" class="container">
+<section class="row">
+  <h1 class="col-md">
+    {{ object }}
+  </h1>
+  <div class="col-md-4">
+    <div class="btn-group float-right mt-2" role="group">
+      <a class="btn btn-secondary btn-md" href="{{ object.activity.get_absolute_url }}">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        {{ object.activity.name }}
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+{% endblock %}

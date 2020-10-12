@@ -1,0 +1,83 @@
+{% extends "LZK/content.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<main role="main" class="container">
+<section class="row">
+  <h1 class="col-md">
+    {% blocktrans with university=object.university %}
+    Feedback from {{ university }}
+    {% endblocktrans %}
+  </h1>
+</section>
+<section class="row">
+  <div class="col-md">
+  {% for text in texts %}
+  {{ text.body }}
+  {% endfor %}
+  </div>
+</section>
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+  <div class="col mb-4">
+    <div class="card h-100">
+      <div class="card-header">
+        {% trans "Generic comment" %}
+      </div>
+      <div class="card-body">
+        {% crispy form %}
+      </div>
+    </div>
+  </div>
+  {% for subject in object.subjects.all %}
+  <div class="col mb-4">
+    <div class="card h-100">
+      <div class="card-header">
+        {% trans "Subject" %}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ subject }}</h5>
+        <p class="card-text">text</p>
+      </div>
+      <div class="card-footer">
+        {% if subject.ability_set.count > 0 %}
+        <a href="{% url 'feedback-ability' pk=subject.pk %}" class="btn btn-primary btn-block">
+          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+          {% trans "Abilities" %}
+        </a>
+        {% endif %}
+        {% if subject.symptom_set.count > 0 %}
+        <a href="{% url 'feedback-symptom' pk=subject.pk %}" class="btn btn-primary btn-block">
+          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+          {% trans "Symptoms" %}
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+  {% for activity in object.activities.all %}
+  <div class="col mb-4">
+    <div class="card h-100">
+      <div class="card-header">
+        {% trans "Activity" %}
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">{{ activity }}</h5>
+        <p class="card-text">text</p>
+      </div>
+      <div class="card-footer">
+        {% if activity.skill_set.count > 0 %}
+        <a href="{% url 'feedback-skill' pk=activity.pk %}" class="btn btn-primary btn-block">
+          <i class="fa fa-commenting-o" aria-hidden="true"></i>
+          {% trans "Skills" %}
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+</main>
+{% endblock %}

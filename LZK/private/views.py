@@ -1,30 +1,36 @@
 import logging
-from crispy_forms.bootstrap import FormActions, StrictButton
-from psqlextra.query import ConflictAction
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Layout, Fieldset, ButtonHolder, Submit
-from django_filters.views import FilterView
-from django_tables2.views import SingleTableMixin
-from psqlextra.util import postgres_manager
 from itertools import islice
 
-from openpyxl import load_workbook
-from django.urls import reverse_lazy as reverse
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import get_template
-from django.template import Context
-from django.views.generic import TemplateView, FormView
-from django.views.generic import ListView, CreateView, DetailView
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.mixins import PermissionRequiredMixin
-from django.utils.translation import gettext_lazy as _
 from braces.views import SuperuserRequiredMixin
+from crispy_forms.bootstrap import FormActions, StrictButton
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import ButtonHolder, Fieldset, Layout, Submit
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.core.mail import EmailMultiAlternatives
+from django.http import HttpResponseNotAllowed, HttpResponseRedirect
+from django.template import Context
+from django.template.loader import get_template
+from django.urls import reverse_lazy as reverse
+from django.utils.translation import gettext_lazy as _
+from django.views.generic import (
+    CreateView,
+    DetailView,
+    FormView,
+    ListView,
+    TemplateView,
+    View,
+)
+from django.views.generic.detail import SingleObjectMixin
+from django_filters.views import FilterView
+from django_tables2.views import SingleTableMixin
+from openpyxl import load_workbook
+from psqlextra.query import ConflictAction
+from psqlextra.util import postgres_manager
 
-
-from ..mixins import FilterFormHelperMixin
 from .. import models
+from ..mixins import FilterFormHelperMixin
+from . import filters, forms, tables
 from .conf import settings
-from . import forms, tables, filters
 
 logger = logging.getLogger(__name__)
 
@@ -66,21 +72,20 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
         )
 
         objective_sheet = wb.get_sheet_by_name(settings.LZK_IMPORT_SHEET_OBJECTIVES)
-        objective_data = list()
+        ability_data = list()
         level_data = dict()
         activity_data = dict()
         cl_data = dict()
-        cl_activity_map = dict()
         skill_data = list()
         skill_activity_map = dict()
         subject_data = dict()
         system_data = dict()
         study_field_data = dict()
-        objective_level_data = list()
-        objective_subject_data = list()
-        objective_system_data = list()
-        objective_ufid_data = list()
-        objective_study_field_data = dict()
+        ability_level_data = list()
+        ability_subject_data = list()
+        ability_system_data = list()
+        ability_ufid_data = list()
+        ability_study_field_data = dict()
         symptom_data = list()
         symptom_subject_data = list()
         for row in islice(objective_sheet.iter_rows(), 1, None):
@@ -90,6 +95,8 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                     {
                         "pk": row[0].value,
                         "name": row[1].value.strip(),
+                        "public": row[14].value.strip().lower
+                        == settings.LZK_IMPORT_VALUE_TRUE.lower(),
                     }
                 )
                 # Subjects
@@ -98,7 +105,9 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                         bool, map(lambda s: s.strip(), row[7].value.split(","))
                     ):
                         if s.upper() not in subject_data:
-                            subject_data[s.upper()] = {"name": acronyms.get(s.upper(), s)}
+                            subject_data[s.upper()] = {
+                                "name": acronyms.get(s.upper(), s)
+                            }
                         symptom_subject_data.append(
                             {"symptom_id": row[0].value, "subject_id": s.upper()}
                         )
@@ -114,19 +123,18 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                     if act not in activity_data:
                         activity_data[act] = cl.upper()
                     skill_data.append(
-                        {
-                            "pk": row[0].value,
-                            "name": row[1].value.strip(),
-                        }
+                        {"pk": row[0].value, "name": row[1].value.strip(),}
                     )
                     skill_activity_map[row[0].value] = act
             else:
-                objective_data.append(
+                ability_data.append(
                     {
                         "pk": row[0].value,
                         "name": row[1].value.strip(),
                         "depth": row[2].value,
                         "subject_related": row[9].value.strip().lower()
+                        == settings.LZK_IMPORT_VALUE_TRUE.lower(),
+                        "public": row[14].value.strip().lower()
                         == settings.LZK_IMPORT_VALUE_TRUE.lower(),
                     }
                 )
@@ -135,8 +143,8 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                     for l in map(lambda l: l.strip(), row[3].value.split(",")):
                         if l.upper() not in level_data:
                             level_data[l.upper()] = {"name": acronyms.get(l.upper(), l)}
-                        objective_level_data.append(
-                            {"objective_id": row[0].value, "level_id": l.upper()}
+                        ability_level_data.append(
+                            {"ability_id": row[0].value, "level_id": l.upper()}
                         )
                 # Subjects
                 if row[7].value:
@@ -144,17 +152,21 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                         bool, map(lambda s: s.strip(), row[7].value.split(","))
                     ):
                         if s.upper() not in subject_data:
-                            subject_data[s.upper()] = {"name": acronyms.get(s.upper(), s)}
-                        objective_subject_data.append(
-                            {"objective_id": row[0].value, "subject_id": s.upper()}
+                            subject_data[s.upper()] = {
+                                "name": acronyms.get(s.upper(), s)
+                            }
+                        ability_subject_data.append(
+                            {"ability_id": row[0].value, "subject_id": s.upper()}
                         )
                 # Systems
                 if row[12].value:
                     for s in map(lambda s: s.strip(), row[12].value.split(",")):
                         if s.upper() not in system_data:
-                            system_data[s.upper()] = {"name": acronyms.get(s.upper(), s)}
-                        objective_system_data.append(
-                            {"objective_id": row[0].value, "system_id": s.upper()}
+                            system_data[s.upper()] = {
+                                "name": acronyms.get(s.upper(), s)
+                            }
+                        ability_system_data.append(
+                            {"ability_id": row[0].value, "system_id": s.upper()}
                         )
                 # UFIDs
                 if row[15].value:
@@ -167,11 +179,12 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                         )
                     else:
                         values = map(
-                            lambda u: int(u.strip()), filter(bool, row[15].value.split(","))
+                            lambda u: int(u.strip()),
+                            filter(bool, row[15].value.split(",")),
                         )
                     for u in values:
-                        objective_ufid_data.append(
-                            {"objective_id": row[0].value, "ufid_id": u}
+                        ability_ufid_data.append(
+                            {"ability_id": row[0].value, "ufid_id": u}
                         )
                 # Study field
                 if row[16].value:
@@ -180,21 +193,16 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                         study_field_data[sf.upper()] = {
                             "name": acronyms.get(sf.upper(), sf)
                         }
-                    objective_study_field_data[row[0].value] = sf.upper()
+                    ability_study_field_data[row[0].value] = sf.upper()
 
         models.StudyField.objects.on_conflict(
             ["pk"], ConflictAction.UPDATE
         ).bulk_insert(({**v, **{"pk": k}} for k, v in study_field_data.items()))
 
-        objective_data_update = [
-            {
-                **o,
-                **{
-                    "study_field_id": objective_study_field_data.get(o.get("pk")),
-                },
-            }
-            for o in objective_data
-            if o.get("pk") in objective_study_field_data
+        ability_data_update = [
+            {**o, **{"study_field_id": ability_study_field_data.get(o.get("pk")),},}
+            for o in ability_data
+            if o.get("pk") in ability_study_field_data
         ]
 
         for k, v in cl_data.items():
@@ -202,7 +210,9 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
 
         models.Activity.objects.on_conflict(
             ["name"], ConflictAction.UPDATE
-        ).bulk_insert(({"name": k, "competence_level_id": v} for k, v in activity_data.items()))
+        ).bulk_insert(
+            ({"name": k, "competence_level_id": v} for k, v in activity_data.items())
+        )
         activities_pk = {a.name: a.pk for a in models.Activity.objects.all()}
 
         skill_data_update = [
@@ -218,30 +228,30 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
             if s.get("pk") in skill_activity_map
         ]
 
-        models.Skill.objects.on_conflict(
-            ["pk"], ConflictAction.UPDATE
-        ).bulk_insert(skill_data_update)
+        models.Skill.objects.on_conflict(["pk"], ConflictAction.UPDATE).bulk_insert(
+            skill_data_update
+        )
 
-        objs = models.Objective.objects.on_conflict(
+        objs = models.Ability.objects.on_conflict(
             ["pk"], ConflictAction.UPDATE
-        ).bulk_insert(objective_data_update)
-        #models.Objective.subjects.through.objects.filter(
-        #    objective__pk__in=pks
-        #).delete()
+        ).bulk_insert(ability_data_update)
+        # models.Ability.subjects.through.objects.filter(
+        #    ability__pk__in=pks
+        # ).delete()
 
         syms = models.Symptom.objects.on_conflict(
             ["pk"], ConflictAction.UPDATE
         ).bulk_insert(symptom_data)
-        #models.Symptom.subjects.through.objects.filter(
+        # models.Symptom.subjects.through.objects.filter(
         #    symptom__pk__in=pks
-        #).delete()
+        # ).delete()
 
         models.Subject.objects.on_conflict(["pk"], ConflictAction.UPDATE).bulk_insert(
             ({**v, **{"pk": k}} for k, v in subject_data.items())
         )
 
-        with postgres_manager(models.Objective.subjects.through) as manager:
-            manager.get_queryset().bulk_insert(objective_subject_data)
+        with postgres_manager(models.Ability.subjects.through) as manager:
+            manager.get_queryset().bulk_insert(ability_subject_data)
 
         with postgres_manager(models.Symptom.subjects.through) as manager:
             manager.get_queryset().bulk_insert(symptom_subject_data)
@@ -253,59 +263,42 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
             ({**v, **{"pk": k}} for k, v in system_data.items())
         )
 
-        #models.Objective.levels.through.objects.filter(
-        #    objective__pk__in=pks
-        #).delete()
-        with postgres_manager(models.Objective.levels.through) as manager:
-            manager.get_queryset().bulk_insert(objective_level_data)
+        # models.Ability.levels.through.objects.filter(
+        #    ability__pk__in=pks
+        # ).delete()
+        with postgres_manager(models.Ability.levels.through) as manager:
+            manager.get_queryset().bulk_insert(ability_level_data)
 
+        # models.Ability.systems.through.objects.filter(
+        #    ability__pk__in=pks
+        # ).delete()
+        with postgres_manager(models.Ability.systems.through) as manager:
+            manager.get_queryset().bulk_insert(ability_system_data)
 
-        #models.Objective.systems.through.objects.filter(
-        #    objective__pk__in=pks
-        #).delete()
-        with postgres_manager(models.Objective.systems.through) as manager:
-            manager.get_queryset().bulk_insert(objective_system_data)
-
-        #models.Objective.ufids.through.objects.filter(
-        #    objective__pk__in=pks
-        #).delete()
-        with postgres_manager(models.Objective.ufids.through) as manager:
-            manager.get_queryset().bulk_insert(objective_ufid_data)
+        # models.Ability.ufids.through.objects.filter(
+        #    ability__pk__in=pks
+        # ).delete()
+        with postgres_manager(models.Ability.ufids.through) as manager:
+            manager.get_queryset().bulk_insert(ability_ufid_data)
 
         return super().form_valid(form)
 
 
-class ListObjectiveView(LoginRequiredMixin, ListView):
-    model = models.Objective
+class ListAbilityView(LoginRequiredMixin, ListView):
+    model = models.Ability
     paginate_by = 50
-    template_name = "LZK/private/objective/list.html"
+    template_name = "LZK/private/ability/list.html"
 
 
-class ListFeedbackView(
-    LoginRequiredMixin, SingleTableMixin, FilterFormHelperMixin, FilterView
-):
+class ListFeedbackView(LoginRequiredMixin, SingleTableMixin, FilterView):
     model = models.Feedback
     template_name = "LZK/private/feedback/list.html"
     table_class = tables.FeedbackTable
     filterset_class = filters.FeedbackFilter
 
-    def get_filterset_formhelper(self, form):
-        helper = FormHelper(form)
-        helper.form_action = "."
-        helper.form_method = "GET"
-        helper.html5_required = True
-        # import pudb; pu.db
-        helper.layout = Layout(
-            Fieldset(
-                "Filter",
-                *helper.layout.fields,
-                FormActions(
-                    StrictButton("Filter", type="submit", css_class="btn-primary"),
-                    css_class="form-group",
-                ),
-            )
-        )
-        return helper
+    def get_queryset(self):
+        qs = super().get_queryset()
+        return qs.filter(active=True)
 
 
 class CreateFeedbackView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
@@ -313,7 +306,7 @@ class CreateFeedbackView(LoginRequiredMixin, PermissionRequiredMixin, CreateView
     form_class = forms.FeedbackForm
     template_name = "LZK/private/feedback/create.html"
     success_url = reverse("private:feedback-list")
-    permission_required = 'LZK.add_feedback'
+    permission_required = "LZK.add_feedback"
 
     def form_valid(self, form):
         response = super().form_valid(form)
@@ -337,11 +330,166 @@ class CreateFeedbackView(LoginRequiredMixin, PermissionRequiredMixin, CreateView
         return response
 
 
-class DetailFeedbackView(LoginRequiredMixin, PermissionRequiredMixin, SingleTableMixin, DetailView):
+class DetailFeedbackView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = models.Feedback
     template_name = "LZK/private/feedback/detail.html"
-    table_class = tables.CommentTable
-    permission_required = 'LZK.view_feedback'
+    permission_required = "LZK.view_feedback"
 
-    def get_table_data(self):
-        return self.object.comment_set.all()
+
+class CloseFeedbackView(
+    LoginRequiredMixin, PermissionRequiredMixin, SingleObjectMixin, View
+):
+    model = models.Feedback
+    permission_required = "LZK.change_feedback"
+
+    def post(self, request, *args, **kwargs):
+        obj = self.get_object()
+        obj.active = False
+        obj.save()
+        url = reverse("private:feedback-list")
+        return HttpResponseRedirect(url)
+
+
+class AbilityCommentView(
+    LoginRequiredMixin,
+    PermissionRequiredMixin,
+    SingleTableMixin,
+    SingleObjectMixin,
+    FilterView,
+):
+    model = models.Feedback
+    template_name = "LZK/private/feedback/abilities.html"
+    table_class = tables.AbilityCommentTable
+    permission_required = "LZK.view_feedback"
+    filterset_class = filters.AbilityCommentFilter
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().get(request, *args, **kwargs)
+
+    def get_filterset_kwargs(self, filterset_class):
+        kwargs = super().get_filterset_kwargs(filterset_class)
+        kwargs["queryset"] = self.object.abilitycomment_set.filter(
+            status=self.table_class.Meta.model.OPEN
+        )
+        return kwargs
+
+
+class ChangeAbilityCommentView(
+    LoginRequiredMixin, PermissionRequiredMixin, SingleObjectMixin, View
+):
+    model = models.AbilityComment
+    permission_required = "LZK.change_feedback"
+
+    states = {
+        "accept": model.ACCEPTED,
+        "discard": model.DISCARDED,
+    }
+
+    def post(self, request, action, *args, **kwargs):
+        state = self.states.get(action)
+        if not state:
+            return HttpResponseNotAllowed()
+        obj = self.get_object()
+        obj.status = state
+        obj.save()
+        url = reverse(
+            "private:feedback-detail-abilities", kwargs={"pk": obj.feedback.pk}
+        )
+        return HttpResponseRedirect(url)
+
+
+class SymptomCommentView(
+    LoginRequiredMixin,
+    PermissionRequiredMixin,
+    SingleTableMixin,
+    SingleObjectMixin,
+    FilterView,
+):
+    model = models.Feedback
+    template_name = "LZK/private/feedback/symptoms.html"
+    table_class = tables.SymptomCommentTable
+    permission_required = "LZK.view_feedback"
+    filterset_class = filters.SymptomCommentFilter
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().get(request, *args, **kwargs)
+
+    def get_filterset_kwargs(self, filterset_class):
+        kwargs = super().get_filterset_kwargs(filterset_class)
+        kwargs["queryset"] = self.object.symptomcomment_set.filter(
+            status=self.table_class.Meta.model.OPEN
+        )
+        return kwargs
+
+
+class ChangeSymptomCommentView(
+    LoginRequiredMixin, PermissionRequiredMixin, SingleObjectMixin, View
+):
+    model = models.SymptomComment
+    permission_required = "LZK.change_feedback"
+
+    states = {
+        "accept": model.ACCEPTED,
+        "discard": model.DISCARDED,
+    }
+
+    def post(self, request, action, *args, **kwargs):
+        state = self.states.get(action)
+        if not state:
+            return HttpResponseNotAllowed()
+        obj = self.get_object()
+        obj.status = state
+        obj.save()
+        url = reverse(
+            "private:feedback-detail-symptoms", kwargs={"pk": obj.feedback.pk}
+        )
+        return HttpResponseRedirect(url)
+
+
+class SkillCommentView(
+    LoginRequiredMixin,
+    PermissionRequiredMixin,
+    SingleTableMixin,
+    SingleObjectMixin,
+    FilterView,
+):
+    model = models.Feedback
+    template_name = "LZK/private/feedback/skills.html"
+    table_class = tables.SkillCommentTable
+    permission_required = "LZK.view_feedback"
+    filterset_class = filters.SkillCommentFilter
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().get(request, *args, **kwargs)
+
+    def get_filterset_kwargs(self, filterset_class):
+        kwargs = super().get_filterset_kwargs(filterset_class)
+        kwargs["queryset"] = self.object.skillcomment_set.filter(
+            status=self.table_class.Meta.model.OPEN
+        )
+        return kwargs
+
+
+class ChangeSkillCommentView(
+    LoginRequiredMixin, PermissionRequiredMixin, SingleObjectMixin, View
+):
+    model = models.SkillComment
+    permission_required = "LZK.change_feedback"
+
+    states = {
+        "accept": model.ACCEPTED,
+        "discard": model.DISCARDED,
+    }
+
+    def post(self, request, action, *args, **kwargs):
+        state = self.states.get(action)
+        if not state:
+            return HttpResponseNotAllowed()
+        obj = self.get_object()
+        obj.status = state
+        obj.save()
+        url = reverse("private:feedback-detail-skills", kwargs={"pk": obj.feedback.pk})
+        return HttpResponseRedirect(url)

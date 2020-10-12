@@ -1,9 +1,8 @@
-from django.db.models.signals import m2m_changed, post_save, post_delete
+from django.db.models.signals import m2m_changed, post_delete, post_save
 from haystack.signals import BaseSignalProcessor
 
 
 class SignalProcessor(BaseSignalProcessor):
-
     def setup(self):
         # Naive (listen to all model saves).
         post_save.disconnect(self.handle_save)

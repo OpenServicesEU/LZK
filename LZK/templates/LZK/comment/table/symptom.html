@@ -1,0 +1,5 @@
+{% load i18n %}
+<a href="{% url "comment-symptom" pk=record.pk %}{% if subject %}?subject={{ subject.pk }}{% endif %}" class="btn btn-primary btn-sm">
+  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+  {% trans "Comment" %}
+</a>

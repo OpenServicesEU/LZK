@@ -1,0 +1,27 @@
+{% extends "LZK/content.html" %}
+
+{% load i18n %}
+
+{% block content %}
+<main role="main" class="container">
+<section class="row">
+  <h1 class="col-md">
+    {{ object }}
+  </h1>
+  <div class="col-md-4">
+    <div class="btn-group float-right mt-2" role="group">
+      <a class="btn btn-secondary btn-md" href="{% url "ability-list" %}">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+        {% trans "Abilities" %}
+      </a>
+    </div>
+  </div>
+</section>
+<dl class="row">
+  <dt class="col-sm-3">{% trans "Depth" %}</dt>
+  <dd class="col-sm-9">{{ object.depth }}</dd>
+  <dt class="col-sm-3">{% trans "Levels" %}</dt>
+  <dd class="col-sm-9">{% include "LZK/ability/includes/levels.html" with record=object %} </dd>
+</dl>
+</main>
+{% endblock %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-04 21:42+0000\n"
+"POT-Creation-Date: 2020-10-12 23:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,160 +22,213 @@ msgstr ""
 msgid "Lernzielkatalog"
 msgstr "Lernzielkatalog"
 
-#: LZK/admin.py:10 LZK/admin.py:11 LZK/templates/LZK/content.html:43
+#: LZK/admin.py:10 LZK/admin.py:11 LZK/templates/LZK/content.html:58
 msgid "Administration"
 msgstr "Administration"
 
-#: LZK/models.py:26 LZK/models.py:42 LZK/models.py:52
-msgid "University"
-msgstr "Universität"
+#: LZK/filters.py:11 LZK/models.py:150 LZK/models.py:168
+msgid "Ability"
+msgstr "Fähigkeit"
 
-#: LZK/models.py:34 LZK/models.py:60 LZK/models.py:75 LZK/models.py:90
-#: LZK/models.py:105 LZK/models.py:120 LZK/models.py:192 LZK/models.py:205
-#: LZK/models.py:221
-msgid "Name"
-msgstr "Name"
+#: LZK/filters.py:31 LZK/filters.py:57 LZK/filters.py:83
+msgid "Apply"
+msgstr "Anwenden"
 
-#: LZK/models.py:43
-msgid "Universities"
-msgstr "Universitäten"
-
-#: LZK/models.py:59 LZK/models.py:74 LZK/models.py:89 LZK/models.py:119
-#: LZK/models.py:191
-msgid "Acronym"
-msgstr "Akronym"
-
-#: LZK/models.py:65
-msgid "Level"
-msgstr "Level"
-
-#: LZK/models.py:66
-msgid "Levels"
-msgstr "Levels"
-
-#: LZK/models.py:80
-msgid "Subject"
-msgstr "Fach"
-
-#: LZK/models.py:81
-msgid "Subjects"
-msgstr "Fächer"
-
-#: LZK/models.py:95
-msgid "System"
-msgstr "System"
-
-#: LZK/models.py:96
-msgid "Systems"
-msgstr "Systeme"
-
-#: LZK/models.py:110
-msgid "UFID"
-msgstr "UFID"
-
-#: LZK/models.py:111
-msgid "UFIDs"
-msgstr "UFIDs"
-
-#: LZK/models.py:125
-msgid "Study field"
-msgstr ""
-
-#: LZK/models.py:126
-msgid "Study fields"
-msgstr ""
-
-#: LZK/models.py:134 LZK/models.py:149
-msgid "Educational objective"
-msgstr "Lernziel"
-
-#: LZK/models.py:140
-msgid "Module track"
-msgstr "Modul-Track"
-
-#: LZK/models.py:141
-msgid "module tracks"
-msgstr "Modul-Tracks"
-
-#: LZK/models.py:151
-msgid "Depth"
-msgstr "Tiefe"
-
-#: LZK/models.py:155
-msgid "Subject related"
-msgstr "Fachverwandt"
-
-#: LZK/models.py:167
-msgid "Objective"
-msgstr "Lernziel"
-
-#: LZK/models.py:168
-msgid "Objectives"
-msgstr "Lernziele"
-
-#: LZK/models.py:176 LZK/models.py:182
+#: LZK/filters.py:40 LZK/models.py:180 LZK/models.py:187
 msgid "Symptom"
 msgstr "Symptom"
 
-#: LZK/models.py:183
-msgid "Symptoms"
-msgstr "Symptome"
-
-#: LZK/models.py:193
-msgid "Short"
-msgstr "Kursbezeichnung"
-
-#: LZK/models.py:197
-msgid "Competence level"
-msgstr "Kompetenzstufe"
-
-#: LZK/models.py:198
-msgid "Competence levels"
-msgstr "Kompetenzstufen"
-
-#: LZK/models.py:211
-msgid "Activity"
-msgstr "Tätigkeit"
-
-#: LZK/models.py:212
-msgid "Activities"
-msgstr "Tätigkeiten"
-
-#: LZK/models.py:227
+#: LZK/filters.py:66 LZK/models.py:238 LZK/tables.py:78
 msgid "Skill"
 msgstr "Fertigkeit"
 
-#: LZK/models.py:228
+#: LZK/models.py:27 LZK/models.py:43 LZK/models.py:53
+msgid "University"
+msgstr "Universität"
+
+#: LZK/models.py:35 LZK/models.py:61 LZK/models.py:76 LZK/models.py:91
+#: LZK/models.py:106 LZK/models.py:121 LZK/models.py:200 LZK/models.py:213
+#: LZK/models.py:232
+msgid "Name"
+msgstr "Name"
+
+#: LZK/models.py:44
+msgid "Universities"
+msgstr "Universitäten"
+
+#: LZK/models.py:60 LZK/models.py:75 LZK/models.py:90 LZK/models.py:120
+#: LZK/models.py:199
+msgid "Acronym"
+msgstr "Akronym"
+
+#: LZK/models.py:66
+msgid "Level"
+msgstr "Level"
+
+#: LZK/models.py:67 LZK/tables.py:9 LZK/tables.py:26
+#: LZK/templates/LZK/ability/detail.html:23
+#: LZK/templates/LZK/symptom/detail.html:24
+msgid "Levels"
+msgstr "Levels"
+
+#: LZK/models.py:81 LZK/templates/LZK/feedback/index.html:37
+msgid "Subject"
+msgstr "Fach"
+
+#: LZK/models.py:82
+msgid "Subjects"
+msgstr "Fächer"
+
+#: LZK/models.py:96
+msgid "System"
+msgstr "System"
+
+#: LZK/models.py:97
+msgid "Systems"
+msgstr "Systeme"
+
+#: LZK/models.py:111
+msgid "UFID"
+msgstr "UFID"
+
+#: LZK/models.py:112
+msgid "UFIDs"
+msgstr "UFIDs"
+
+#: LZK/models.py:126
+msgid "Study field"
+msgstr ""
+
+#: LZK/models.py:127
+msgid "Study fields"
+msgstr ""
+
+#: LZK/models.py:135 LZK/models.py:141
+msgid "Module track"
+msgstr "Modul-Track"
+
+#: LZK/models.py:142
+msgid "module tracks"
+msgstr "Modul-Tracks"
+
+#: LZK/models.py:152 LZK/templates/LZK/ability/detail.html:21
+#: LZK/templates/LZK/symptom/detail.html:22
+msgid "Depth"
+msgstr "Tiefe"
+
+#: LZK/models.py:156
+msgid "Subject related"
+msgstr "Fachverwandt"
+
+#: LZK/models.py:169 LZK/models.py:370 LZK/templates/LZK/ability/detail.html:15
+#: LZK/templates/LZK/ability/list.html:11 LZK/templates/LZK/content.html:24
+#: LZK/templates/LZK/feedback/index.html:47
+msgid "Abilities"
+msgstr "Fähigkeiten"
+
+#: LZK/models.py:188 LZK/models.py:371 LZK/templates/LZK/content.html:30
+#: LZK/templates/LZK/feedback/index.html:53
+#: LZK/templates/LZK/symptom/detail.html:16
+#: LZK/templates/LZK/symptom/list.html:11
+msgid "Symptoms"
+msgstr "Symptome"
+
+#: LZK/models.py:201
+msgid "Short"
+msgstr "Kursbezeichnung"
+
+#: LZK/models.py:205
+msgid "Competence level"
+msgstr "Kompetenzstufe"
+
+#: LZK/models.py:206
+msgid "Competence levels"
+msgstr "Kompetenzstufen"
+
+#: LZK/models.py:219 LZK/templates/LZK/feedback/index.html:64
+msgid "Activity"
+msgstr "Tätigkeit"
+
+#: LZK/models.py:220 LZK/tables.py:67
+msgid "Activities"
+msgstr "Tätigkeiten"
+
+#: LZK/models.py:239 LZK/models.py:372
+#: LZK/templates/LZK/competence_level/list.html:9
+#: LZK/templates/LZK/content.html:36 LZK/templates/LZK/feedback/index.html:74
 msgid "Skills"
 msgstr "Fertigkeiten"
 
-#: LZK/models.py:242
+#: LZK/models.py:254 LZK/models.py:352
+msgid "Active"
+msgstr "Aktiv"
+
+#: LZK/models.py:255
+msgid "Notes"
+msgstr "Notizen"
+
+#: LZK/models.py:258
 msgid "Feedback"
 msgstr "Rückmeldung"
 
-#: LZK/models.py:243
+#: LZK/models.py:259
 msgid "Feedbacks"
 msgstr "Rückmeldungen"
 
-#: LZK/models.py:267
+#: LZK/models.py:279
+msgid "Open"
+msgstr "Offen"
+
+#: LZK/models.py:280
+msgid "Discarded"
+msgstr "Verworfen"
+
+#: LZK/models.py:281
+msgid "Accepted"
+msgstr "Akzeptiert"
+
+#: LZK/models.py:295 LZK/templates/LZK/comment/actions.html:4
+#: LZK/templates/LZK/comment/table/ability.html:4
+#: LZK/templates/LZK/comment/table/skill.html:4
+#: LZK/templates/LZK/comment/table/symptom.html:4
 msgid "Comment"
 msgstr "Anmerkung"
 
-#: LZK/models.py:268
+#: LZK/models.py:296
 msgid "Comments"
 msgstr "Anmerkungen"
 
-#: LZK/models.py:281
+#: LZK/models.py:327
 msgid "Slide"
 msgstr "Slide"
 
-#: LZK/models.py:282
+#: LZK/models.py:328
 msgid "Slides"
 msgstr "Slides"
 
-#: LZK/models.py:295 LZK/models.py:296
+#: LZK/models.py:341 LZK/models.py:342
 msgid "News"
 msgstr "Ankündigungen"
+
+#: LZK/models.py:356
+msgid "Download"
+msgstr "Download"
+
+#: LZK/models.py:357
+msgid "Downloads"
+msgstr "Downloads"
+
+#: LZK/models.py:373
+msgid "Feedback (Email)"
+msgstr "Rückmeldung (Email)"
+
+#: LZK/models.py:384
+msgid "Text"
+msgstr "Text"
+
+#: LZK/models.py:385
+msgid "Texts"
+msgstr "Texte"
 
 #: LZK/settings.py:125
 msgid "German"
@@ -185,29 +238,153 @@ msgstr "Deutsch"
 msgid "English"
 msgstr "Englisch"
 
+#: LZK/tables.py:14 LZK/tables.py:43 LZK/tables.py:80
+msgid "Link"
+msgstr "Link"
+
+#: LZK/tables.py:31 LZK/tables.py:55 LZK/tables.py:95
+msgid "Actions"
+msgstr "Aktionen"
+
+#: LZK/templates/LZK/ability/list.html:28
+#: LZK/templates/LZK/feedback/abilities.html:31
+#: LZK/templates/LZK/feedback/skills.html:31
+#: LZK/templates/LZK/feedback/symptoms.html:31
+msgid "No abilities found."
+msgstr "Es wurden keine Fähigkeiten gefunden."
+
+#: LZK/templates/LZK/ability/list.html:37
+#: LZK/templates/LZK/activity/list.html:38
+#: LZK/templates/LZK/feedback/abilities.html:40
+#: LZK/templates/LZK/feedback/skills.html:40
+#: LZK/templates/LZK/feedback/symptoms.html:40
+#: LZK/templates/LZK/symptom/list.html:37
+msgid "Filter"
+msgstr "Filter"
+
+#: LZK/templates/LZK/activity/list.html:17
+#: LZK/templates/LZK/feedback/abilities.html:19
+#: LZK/templates/LZK/feedback/skills.html:19
+#: LZK/templates/LZK/feedback/symptoms.html:19
+msgid "Back"
+msgstr "Zurück"
+
+#: LZK/templates/LZK/activity/list.html:29
+msgid "No skills found."
+msgstr "Es wurden keine Fertigkeiten gefunden."
+
 #: LZK/templates/LZK/base.html:16
 msgid "Lernzielkatalog Medizin"
 msgstr "Lernzielkatalog Medizin"
 
-#: LZK/templates/LZK/content.html:8
+#: LZK/templates/LZK/comment/ability.html:11
+#, python-format
+msgid ""
+"\n"
+"      Feedback for %(ability)s\n"
+"      "
+msgstr ""
+"\n"
+"      Anmerkungen zu %(ability)s\n"
+"      "
+
+#: LZK/templates/LZK/comment/ability.html:20
+#: LZK/templates/LZK/comment/skill.html:20
+#: LZK/templates/LZK/comment/symptom.html:20
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: LZK/templates/LZK/comment/list.html:10
+msgid "Ojectives"
+msgstr "Lernziele"
+
+#: LZK/templates/LZK/comment/skill.html:11
+#, python-format
+msgid ""
+"\n"
+"      Feedback for %(skill)s\n"
+"      "
+msgstr ""
+"\n"
+"      Anmerkungen zu %(skill)s\n"
+"      "
+
+#: LZK/templates/LZK/comment/symptom.html:11
+#, python-format
+msgid ""
+"\n"
+"      Feedback for %(symptom)s\n"
+"      "
+msgstr ""
+"\n"
+"      Anmerkungen zu %(symptom)s\n"
+"      "
+
+#: LZK/templates/LZK/competence_level/list.html:43
+msgid "No competence levels have been defined yet."
+msgstr "Es wurden noch keine Fertigkeiten festgelegt."
+
+#: LZK/templates/LZK/content.html:10
 msgid "Lernzielkatalog Österreich"
 msgstr "Lernzielkatalog Österreich"
 
-#: LZK/templates/LZK/content.html:9
+#: LZK/templates/LZK/content.html:14
 msgid "LZK-Ö"
 msgstr "LZK-Ö"
 
-#: LZK/templates/LZK/content.html:27
+#: LZK/templates/LZK/content.html:42
 msgid "Suche"
 msgstr "Suche"
 
-#: LZK/templates/LZK/content.html:48
+#: LZK/templates/LZK/content.html:63
 msgid "Logout"
 msgstr "Abmelden"
 
-#: LZK/templates/LZK/content.html:55
+#: LZK/templates/LZK/content.html:70
 msgid "Login"
 msgstr "Anmelden"
+
+#: LZK/templates/LZK/feedback/index.html:10
+#, python-format
+msgid ""
+"\n"
+"    Feedback from %(university)s\n"
+"    "
+msgstr ""
+"\n"
+"    Rückmeldung von %(university)s\n"
+"    "
+
+#: LZK/templates/LZK/feedback/index.html:26
+msgid "Generic comment"
+msgstr "Allgemeine Notizen"
+
+#: LZK/templates/LZK/index.html:30
+msgid "Previous"
+msgstr ""
+
+#: LZK/templates/LZK/index.html:34
+msgid "Next"
+msgstr ""
+
+#: LZK/templates/LZK/search.html:9
+#, python-format
+msgid ""
+"\n"
+"    %(count)s results for \"%(query)s\"\n"
+"    "
+msgstr ""
+"\n"
+"    %(count)s Treffer für \"%(query)s\"\n"
+"    "
+
+#: LZK/templates/LZK/search.html:26
+msgid "No results found."
+msgstr "Es wurden keine Treffer gefunden."
+
+#: LZK/templates/LZK/symptom/list.html:28
+msgid "No symptoms found."
+msgstr "Es wurden keine Symptome gefunden."
 
 #: LZK/templates/LZK/table.html:66
 msgid "previous"
@@ -243,44 +420,11 @@ msgstr ""
 msgid "File is no a valid XLS document."
 msgstr ""
 
-#~ msgid "Actions"
-#~ msgstr "Aktionen"
+#: LZK/views.py:144
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
 
-#~ msgid "Accept"
-#~ msgstr "Annehmen"
-
-#~ msgid "Discard"
-#~ msgstr "Verwerfen"
-
-#~ msgid "View"
-#~ msgstr "Anzeigen"
-
-#~ msgid "Create new request for feedback"
-#~ msgstr "Neue Anfrage für Rückmeldungen erstellen"
-
-#~ msgid "Cancel"
-#~ msgstr "Abbrechen"
-
-#~ msgid "Back"
-#~ msgstr "Zurück"
-
-#~ msgid "No comments have been created yet."
-#~ msgstr "Es wurden noch keine Anmerkungen erfasst."
-
-#~ msgid "Create"
-#~ msgstr "Erstellen"
-
-#~ msgid "Show filters"
-#~ msgstr "Filter anzeigen"
-
-#~ msgid "No requests for feedback have been created."
-#~ msgstr "Es wurden noch keine Anfragen für Rückmeldungen erstellt."
-
-#~ msgid "Excel import"
-#~ msgstr "Excel Import"
-
-#~ msgid "No objectives have been defined yet."
-#~ msgstr "Es wurden noch keine Lernziele festgelegt."
-
-#~ msgid "No subjects were found."
-#~ msgstr "Es wurden keine Fächer gefunden."
+#: LZK/views.py:178 LZK/views.py:238 LZK/views.py:306 LZK/views.py:379
+msgid "Save"
+msgstr "Speichern"

@@ -21,33 +21,30 @@
     </div>
   </div>
 </section>
-
-
-<div id="filters">
-  <div class="card">
-    <div class="card-header" id="headingFilters">
-      <h5 class="mb-0">
-        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseFilters" aria-expanded="false" aria-controls="collapseFilters">
-          {% trans "Show filters" %}
-        </button>
-      </h5>
-    </div>
-    <div id="collapseFilters" class="collapse" aria-labelledby="headingFilters" data-parent="#filters">
-      <div class="card-body">
-<form method="get">
-  {% crispy filter.form %}
-</form>
-      </div>
-    </div>
-  </div>
-</div>
+<section class="row">
+  <div class="col-md">
 {% if table.data|length > 0 %}
-{% render_table table %}
+    {% render_table table %}
 {% else %}
 <div class="alert alert-primary" role="alert">
   <i class="fa fa-info-circle" aria-hidden="true"></i>
-  {% trans "No requests for feedback have been created." %}
+  {% trans "No requests for feedback found." %}
 </div>
 {% endif %}
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-header">
+        <h5>
+          <i class="fa fa-filter" aria-hidden="true"></i>
+          {% trans "Filter" %}
+        </h5>
+      </div>
+      <div class="card-body">
+        {% crispy filter.form %}
+      </div>
+    </div>
+  </div>
+<section>
 </main>
 {% endblock %}

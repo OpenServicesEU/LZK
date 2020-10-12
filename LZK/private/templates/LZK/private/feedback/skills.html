@@ -1,0 +1,50 @@
+{% extends "LZK/content.html" %}
+
+{% load i18n %}
+{% load render_table from django_tables2 %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<main role="main" class="container">
+<section class="row">
+  <div class="col-md-8">
+    <h1>
+      {% trans "Feedback on skills" %}
+    </h1>
+  </div>
+  <div class="col-md-4">
+    <div class="btn-group float-right mt-2" role="group">
+      <a class="btn btn-secondary btn-md" href="{% url "private:feedback-detail" pk=object.pk %}">
+        <i class="fa fa-arrow-circle-o-left" aria-hidden="true"></i>
+        {% trans "Back" %}
+      </a>
+    </div>
+  </div>
+</section>
+<section class="row">
+  <div class="col-md">
+{% if table.data|length > 0 %}
+    {% render_table table %}
+{% else %}
+<div class="alert alert-primary" role="alert">
+  <i class="fa fa-info-circle" aria-hidden="true"></i>
+  {% trans "No feedback on skills has been provided yet." %}
+</div>
+{% endif %}
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-header">
+        <h5>
+          <i class="fa fa-filter" aria-hidden="true"></i>
+          {% trans "Filter" %}
+        </h5>
+      </div>
+      <div class="card-body">
+        {% crispy filter.form %}
+      </div>
+    </div>
+  </div>
+<section>
+</main>
+{% endblock %}

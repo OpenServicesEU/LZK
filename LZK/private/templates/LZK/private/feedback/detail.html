@@ -1,7 +1,6 @@
 {% extends "LZK/content.html" %}
 
 {% load i18n %}
-{% load render_table from django_tables2 %}
 
 {% block content %}
 <main role="main" class="container">
@@ -22,13 +21,36 @@
     </div>
   </div>
 </section>
-{% if table.data|length > 0 %}
-{% render_table table %}
-{% else %}
-<div class="alert alert-primary" role="alert">
-  <i class="fa fa-info-circle" aria-hidden="true"></i>
-  {% trans "No comments have been created yet." %}
-</div>
-{% endif %}
+<section class="row">
+  <blockquote class="blockquote text-muted col-md">
+    {{ object.notes }}
+  </blockquote>
+</section>
+<section class="row">
+  <div class="col-md-4">
+    <a href="{% url "private:feedback-detail-abilities" pk=object.pk %}" class="btn btn-primary btn-block">
+      <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+      {% blocktrans with abilities=object.abilitycomment_set.count %}
+      {{ abilities }} Abilities
+      {% endblocktrans %}
+    </a>
+  </div>
+  <div class="col-md-4">
+    <a href="{% url "private:feedback-detail-symptoms" pk=object.pk %}" class="btn btn-primary btn-block">
+      <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+      {% blocktrans with symptoms=object.symptomcomment_set.count %}
+      {{ symptoms }} Symptoms
+      {% endblocktrans %}
+    </a>
+  </div>
+  <div class="col-md-4">
+    <a href="{% url "private:feedback-detail-skills" pk=object.pk %}" class="btn btn-primary btn-block">
+      <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+      {% blocktrans with skills=object.skillcomment_set.count %}
+      {{ skills }} Skills
+      {% endblocktrans %}
+    </a>
+  </div>
+</section>
 </main>
 {% endblock %}

@@ -1,8 +1,8 @@
-from django.conf import settings
 from appconf import AppConf
+from django.conf import settings
 
 
-class LZKAppConf(AppConf):
+class LZKPrivateAppConf(AppConf):
     IMPORT_SHEET_ACRONYMS = "Abkürzungen gesamt"
     IMPORT_SHEET_OBJECTIVES = "Lernziele gesamt_Datenbank"
     IMPORT_SHEET_UFIDS = "ufid_IMS_Gesamtliste 2019"

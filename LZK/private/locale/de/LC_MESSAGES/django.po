@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-04 21:42+0000\n"
+"POT-Creation-Date: 2020-10-12 23:22+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,54 +22,95 @@ msgstr ""
 msgid "Lernzielkatalog (Private)"
 msgstr ""
 
-#: LZK/private/tables.py:9 LZK/private/tables.py:24
+#: LZK/private/filters.py:28 LZK/private/filters.py:55
+#: LZK/private/filters.py:81 LZK/private/filters.py:107
+msgid "Apply"
+msgstr "Anwenden"
+
+#: LZK/private/filters.py:37 LZK/private/tables.py:28 LZK/private/tables.py:48
+#: LZK/private/tables.py:68
+msgid "Ability"
+msgstr "Fähigkeit"
+
+#: LZK/private/filters.py:38 LZK/private/filters.py:64
+#: LZK/private/filters.py:90
+msgid "Comment"
+msgstr "Anmerkung"
+
+#: LZK/private/filters.py:63
+msgid "Symptom"
+msgstr "Symptom"
+
+#: LZK/private/filters.py:89
+msgid "Skill"
+msgstr "Fertigkeit"
+
+#: LZK/private/tables.py:9
+msgid "Comments"
+msgstr "Anmerkungen"
+
+#: LZK/private/tables.py:14 LZK/private/tables.py:33 LZK/private/tables.py:53
+#: LZK/private/tables.py:73
 msgid "Actions"
 msgstr "Aktionen"
 
+#: LZK/private/templates/LZK/private/comment/ability/table/actions.html:6
 #: LZK/private/templates/LZK/private/comment/actions.html:6
+#: LZK/private/templates/LZK/private/comment/skill/table/actions.html:6
+#: LZK/private/templates/LZK/private/comment/symptom/table/actions.html:6
 msgid "Accept"
 msgstr "Annehmen"
 
+#: LZK/private/templates/LZK/private/comment/ability/table/actions.html:13
 #: LZK/private/templates/LZK/private/comment/actions.html:13
+#: LZK/private/templates/LZK/private/comment/skill/table/actions.html:13
+#: LZK/private/templates/LZK/private/comment/symptom/table/actions.html:13
 msgid "Discard"
 msgstr "Verwerfen"
 
-#: LZK/private/templates/LZK/private/email/feedback.html:339
-#, python-format
-msgid ""
-"\n"
-"    Request for feedback on %(subject)s\n"
-"    "
-msgstr ""
+#: LZK/private/templates/LZK/private/comment/ability/table/text.html:5
+msgid "Depth"
+msgstr "Lerntiefe"
 
-#: LZK/private/templates/LZK/private/email/feedback.html:360
-msgid ""
-"\n"
-"                        Sometimes you just want to send a simple HTML email "
-"with a simple design and clear call to action. This is it.\n"
-"                        "
-msgstr ""
+#: LZK/private/templates/LZK/private/comment/ability/table/text.html:7
+msgid "Level"
+msgstr "Level"
 
-#: LZK/private/templates/LZK/private/email/feedback.html:373
-#, python-format
-msgid ""
-"\n"
-"                                          Open feedback submission for "
-"%(subject)s\n"
-"                                          "
-msgstr ""
+#: LZK/private/templates/LZK/private/email/feedback.html:9
+#: LZK/private/templates/LZK/private/email/feedback.html:341
+#, fuzzy
+#| msgid "LZK: Request for feedback"
+msgid "Request for feedback"
+msgstr "LZK: Anfrage für Rückmeldung"
 
-#: LZK/private/templates/LZK/private/email/feedback.html:386
-msgid ""
-"\n"
-"                        This is a really simple email template. Its sole "
-"purpose is to get the recipient to click the button with no distractions.\n"
-"                        "
-msgstr ""
+#: LZK/private/templates/LZK/private/email/feedback.html:371
+msgid "Go to feedback submission"
+msgstr "Rückmeldung öffnen"
 
-#: LZK/private/templates/LZK/private/feedback/actions.html:4
-msgid "View"
-msgstr "Anzeigen"
+#: LZK/private/templates/LZK/private/feedback/abilities.html:12
+msgid "Feedback on abilities"
+msgstr "Anmerkungen zu Fähigkeiten"
+
+#: LZK/private/templates/LZK/private/feedback/abilities.html:19
+#: LZK/private/templates/LZK/private/feedback/detail.html:19
+#: LZK/private/templates/LZK/private/feedback/skills.html:19
+#: LZK/private/templates/LZK/private/feedback/symptoms.html:19
+msgid "Back"
+msgstr "Zurück"
+
+#: LZK/private/templates/LZK/private/feedback/abilities.html:31
+#: LZK/private/templates/LZK/private/feedback/list.html:31
+#, fuzzy
+#| msgid "No requests for feedback have been created."
+msgid "No requests for feedback found."
+msgstr "Es wurden noch keine Anfragen für Anmerkungen erfasst"
+
+#: LZK/private/templates/LZK/private/feedback/abilities.html:40
+#: LZK/private/templates/LZK/private/feedback/list.html:40
+#: LZK/private/templates/LZK/private/feedback/skills.html:40
+#: LZK/private/templates/LZK/private/feedback/symptoms.html:40
+msgid "Filter"
+msgstr "Filter"
 
 #: LZK/private/templates/LZK/private/feedback/create.html:11
 msgid "Create new request for feedback"
@@ -79,7 +120,7 @@ msgstr "Neue Anfrage für Anmerkungen erstellen"
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: LZK/private/templates/LZK/private/feedback/detail.html:11
+#: LZK/private/templates/LZK/private/feedback/detail.html:10
 #, python-format
 msgid ""
 "\n"
@@ -87,13 +128,38 @@ msgid ""
 "      "
 msgstr ""
 
-#: LZK/private/templates/LZK/private/feedback/detail.html:20
-msgid "Back"
-msgstr "Zurück"
+#: LZK/private/templates/LZK/private/feedback/detail.html:33
+#, python-format
+msgid ""
+"\n"
+"      %(abilities)s Abilities\n"
+"      "
+msgstr ""
+"\n"
+"      %(abilities)s Fähigkeiten\n"
+"      "
 
-#: LZK/private/templates/LZK/private/feedback/detail.html:30
-msgid "No comments have been created yet."
-msgstr "Es wurden noch keine Anmerkungen erfasst"
+#: LZK/private/templates/LZK/private/feedback/detail.html:41
+#, python-format
+msgid ""
+"\n"
+"      %(symptoms)s Symptoms\n"
+"      "
+msgstr ""
+"\n"
+"      %(symptoms)s Symptome\n"
+"      "
+
+#: LZK/private/templates/LZK/private/feedback/detail.html:49
+#, python-format
+msgid ""
+"\n"
+"      %(skills)s Skills\n"
+"      "
+msgstr ""
+"\n"
+"      %(skills)s Fertigkeiten\n"
+"      "
 
 #: LZK/private/templates/LZK/private/feedback/list.html:12
 #: LZK/private/templates/LZK/private/nav.html:5
@@ -104,18 +170,67 @@ msgstr "Rückmeldung"
 msgid "Create"
 msgstr "Erstellen"
 
-#: LZK/private/templates/LZK/private/feedback/list.html:31
-msgid "Show filters"
-msgstr "Filter anzeigen"
+#: LZK/private/templates/LZK/private/feedback/skills.html:12
+msgid "Feedback on skills"
+msgstr "Anmerkungen zu Fertigkeiten"
 
-#: LZK/private/templates/LZK/private/feedback/list.html:49
-msgid "No requests for feedback have been created."
-msgstr "Es wurden noch keine Anfragen für Anmerkungen erfasst"
+#: LZK/private/templates/LZK/private/feedback/skills.html:31
+msgid "No feedback on skills has been provided yet."
+msgstr "Es wurden noch keine Anmerkungen zu Fertigkeiten erfasst."
+
+#: LZK/private/templates/LZK/private/feedback/symptoms.html:12
+msgid "Feedback on symptoms"
+msgstr "Anmerkungen zu Symptomen"
+
+#: LZK/private/templates/LZK/private/feedback/symptoms.html:31
+msgid "No feedback on symtoms has been provided yet."
+msgstr "Es wurden noch keine Anmerkungen zu Symptomen erfasst."
+
+#: LZK/private/templates/LZK/private/feedback/table/actions.html:4
+msgid "View"
+msgstr "Anzeigen"
+
+#: LZK/private/templates/LZK/private/feedback/table/actions.html:10
+msgid "Complete"
+msgstr "Abschliessen"
+
+#: LZK/private/templates/LZK/private/feedback/table/stats.html:4
+#, python-format
+msgid ""
+"\n"
+"  %(abilities)s abilities\n"
+"  "
+msgstr ""
+"\n"
+"      %(abilities)s Fähigkeiten\n"
+"      "
+
+#: LZK/private/templates/LZK/private/feedback/table/stats.html:11
+#, python-format
+msgid ""
+"\n"
+"  %(symptoms)s symptoms\n"
+"  "
+msgstr ""
+"\n"
+"      %(symptoms)s Symptome\n"
+"      "
+
+#: LZK/private/templates/LZK/private/feedback/table/stats.html:18
+#, python-format
+msgid ""
+"\n"
+"  %(skills)s skills\n"
+"  "
+msgstr ""
+"\n"
+"      %(skills)s Fertigkeiten\n"
+"      "
 
 #: LZK/private/templates/LZK/private/nav.html:11
 msgid "Excel import"
 msgstr "Excel Import"
 
-#: LZK/private/views.py:330
+#: LZK/private/views.py:323
 msgid "LZK: Request for feedback"
 msgstr "LZK: Anfrage für Rückmeldung"

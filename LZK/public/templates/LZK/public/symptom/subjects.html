@@ -1,7 +1,0 @@
-{% if record.subjects.count > 0 %}
-{% for subject in record.subjects.all %}
-<a href="{% url 'public:symptom-subject-detail' pk=subject.pk %}">{{ subject.name }}</a>{% if not forloop.last %}, {% endif %}
-{% endfor %}
-{% else %}
--
-{% endif %}

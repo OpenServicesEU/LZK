@@ -1,0 +1,47 @@
+{% extends "LZK/content.html" %}
+
+{% load i18n %}
+{% load render_table from django_tables2 %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<main role="main" class="container">
+<section class="row">
+  <h1 class="col-md">
+    {% trans "Symptoms" %}
+  </h1>
+</section>
+<section class="row">
+  <div class="col-md">
+  {% for text in texts %}
+  {{ text.body }}
+  {% endfor %}
+  </div>
+</section>
+<section class="row">
+  <div class="col-md">
+{% if table.data|length > 0 %}
+    {% render_table table %}
+{% else %}
+<div class="alert alert-primary" role="alert">
+  <i class="fa fa-info-circle" aria-hidden="true"></i>
+  {% trans "No symptoms found." %}
+</div>
+{% endif %}
+  </div>
+  <div class="col-md-3">
+    <div class="card">
+      <div class="card-header">
+        <h5>
+          <i class="fa fa-filter" aria-hidden="true"></i>
+          {% trans "Filter" %}
+        </h5>
+      </div>
+      <div class="card-body">
+        {% crispy filter.form %}
+      </div>
+    </div>
+  </div>
+<section>
+</main>
+{% endblock %}

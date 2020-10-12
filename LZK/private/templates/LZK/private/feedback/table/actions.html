@@ -1,0 +1,12 @@
+{% load i18n %}
+<a href="{% url "private:feedback-detail" pk=record.pk %}" class="btn btn-primary btn-sm btn-block">
+  <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+  {% trans "View" %}
+</a>
+<form method="POST" action="{% url "private:feedback-close" pk=record.pk %}" class="d-block">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-warning btn-sm btn-block">
+    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+    {% trans "Complete" %}
+  </button>
+</form>

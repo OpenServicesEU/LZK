@@ -1,0 +1,15 @@
+{% load i18n %}
+<form method="POST" action="{% url "private:comment-ability-change" pk=record.pk action="accept" %}" class="d-block">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-primary btn-sm btn-block">
+    <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+    {% trans "Accept" %}
+  </button>
+</form>
+<form method="POST" action="{% url "private:comment-ability-change" pk=record.pk action="discard" %}" class="d-block">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-warning btn-sm btn-block">
+    <i class="fa fa-times-circle-o" aria-hidden="true"></i>
+    {% trans "Discard" %}
+  </button>
+</form>

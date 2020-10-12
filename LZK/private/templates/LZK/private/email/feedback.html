@@ -5,7 +5,9 @@
   <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>{{ object.subject }}</title>
+    <title>
+      {% trans "Request for feedback" %}
+    </title>
     {% compress css inline %}
     <style>
       /* -------------------------------------
@@ -336,9 +338,7 @@
   </head>
   <body class="">
     <span class="preheader">
-    {% blocktrans with subject=object.subject %}
-    Request for feedback on {{ subject }}
-    {% endblocktrans %}
+    {% trans "Request for feedback" %}
     </span>
     <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="body">
       <tr>
@@ -356,11 +356,9 @@
                     <tr>
                       <td>
                         <p>{{ contact.salutation }},</p>
-                        <p>
-                        {% blocktrans %}
-                        Sometimes you just want to send a simple HTML email with a simple design and clear call to action. This is it.
-                        {% endblocktrans %}
-                        </p>
+                        {% for text in texts %}
+                        {{ text }}
+                        {% endfor %}
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                           <tbody>
                             <tr>
@@ -369,10 +367,8 @@
                                   <tbody>
                                     <tr>
                                       <td>
-                                        <a href="{{ request.scheme }}://{{ request.get_host }}{% url "public:comment" %}?token={{ object.secret }}" target="_blank">
-                                          {% blocktrans with subject=object.subject %}
-                                          Open feedback submission for {{ subject }}
-                                          {% endblocktrans %}
+                                        <a href="{{ request.scheme }}://{{ request.get_host }}{% url "feedback" %}?token={{ object.secret }}" target="_blank">
+                                          {% trans "Go to feedback submission" %}
                                         </a>
                                       </td>
                                     </tr>
@@ -382,11 +378,6 @@
                             </tr>
                           </tbody>
                         </table>
-                        <p>
-                        {% blocktrans %}
-                        This is a really simple email template. Its sole purpose is to get the recipient to click the button with no distractions.
-                        {% endblocktrans %}
-                        </p>
                       </td>
                     </tr>
                   </table>

@@ -1,2 +1,0 @@
-{{ object.pk }}
-{{ object.name }}

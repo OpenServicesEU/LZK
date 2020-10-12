@@ -1,10 +1,11 @@
 from pathlib import Path
+
+from django.contrib.staticfiles import finders
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django_libsass import OUTPUT_STYLE, SOURCE_COMMENTS, SassCompiler, compile
 from django_pyscss import DjangoScssCompiler
 from django_pyscss.compressor import DjangoScssFilter as BaseDjangoScssFilter
 from django_pyscss.extension.django import DjangoExtension
-from django_libsass import SassCompiler, compile, OUTPUT_STYLE, SOURCE_COMMENTS
-from django.contrib.staticfiles import finders
-from django.contrib.staticfiles.storage import staticfiles_storage
 
 searched_locations = finders.searched_locations
 

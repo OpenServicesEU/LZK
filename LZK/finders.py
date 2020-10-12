@@ -1,10 +1,11 @@
-from pathlib import Path
 from itertools import chain
-from django.contrib.staticfiles import utils
+from pathlib import Path
+
 from django.conf import settings
-from django.core.files.storage import FileSystemStorage
+from django.contrib.staticfiles import utils
 from django.contrib.staticfiles.finders import BaseFinder
 from django.core.checks import Error
+from django.core.files.storage import FileSystemStorage
 
 
 class ScopedFileSystemStorage(FileSystemStorage):

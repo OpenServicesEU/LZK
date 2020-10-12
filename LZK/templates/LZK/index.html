@@ -1,0 +1,98 @@
+{% extends "LZK/content.html" %}
+
+{% load static %}
+{% load i18n %}
+{% load imagekit %}
+
+{% block content %}
+<main role="main" class="container">
+<div class="row mt-2 d-none d-md-block">
+  <div id="carousel" class="carousel slide col-md" data-ride="carousel">
+    <ol class="carousel-indicators">
+      {% for slide in slides %}
+      <li data-target="#carousel" data-slide-to="{{ forloop.counter0 }}"{% if forloop.first %} class="active"{% endif %}></li>
+      {% endfor %}
+    </ol>
+    <div class="carousel-inner">
+      {% for slide in slides %}
+      <div class="carousel-item{% if forloop.first %} active{% endif %}">
+        {% generateimage 'LZK:slide' source=slide.image as si %}
+        <img class="d-block w-100" src="{{ si.url }}" alt="{{ slide.title }}">
+        <div class="carousel-caption d-none d-md-block">
+          <h5>{{ slide.title }}</h5>
+          <p>{{ slide.description }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">{% trans "Previous" %}</span>
+    </a>
+    <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">{% trans "Next" %}</span>
+    </a>
+  </div>
+</div>
+<div class="row mt-2">
+  <div class="col-sm">
+    {% for entry in news %}
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{ entry.title }} <small class="float-sm-right text-muted">{{ entry.datetime }}</small></h3>
+        <p class="card-text">{{ entry.body }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  <div class="col-sm-4">
+    {% for university in universities %}
+    <a href="{{ university.url }}" target="_blank" class="text-decoration-none">
+      <div class="card mb-3">
+        <div class="row no-gutters">
+          <div class="col-md-4 mx-auto">
+            <img src="{{ university.logo.url }}" class="card-img mw-100 mt-3 px-3" alt="{{ university }}">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ university }}</h5>
+              <p class="card-text">
+              <small class="text-muted">
+                <i class="fa fa-link" aria-hidden="true"></i>
+                {{ university.url }}
+              </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </a>
+    {% endfor %}
+    {% for download in downloads %}
+      <div class="card mb-3">
+        <div class="row no-gutters">
+          <div class="col-md-4 d-flex justify-content-center my-auto">
+            <a href="{{ download.file.url }}" target="_blank" class="text-decoration-none">
+              <i class="fa fa-download fa-5x" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ download.title }}</h5>
+              <p class="card-text">
+              {{ download.body }}
+              <small class="text-muted">
+                <i class="fa fa-link" aria-hidden="true"></i>
+                {{ download.file.size|filesizeformat }}
+              </small>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+</main>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% load i18n %}
+{% if record.abilitycomment_set.count > 0 %}
+<a href="{% url "private:feedback-detail-abilities" pk=record.pk %}" class="badge badge-secondary">
+  {% blocktrans with abilities=record.abilitycomment_set.count %}
+  {{ abilities }} abilities
+  {% endblocktrans %}
+</a>
+{% endif %}
+{% if record.symptomcomment_set.count > 0 %}
+<a href="{% url "private:feedback-detail-symptoms" pk=record.pk %}" class="badge badge-secondary">
+  {% blocktrans with symptoms=record.symptomcomment_set.count%}
+  {{ symptoms }} symptoms
+  {% endblocktrans %}
+</a>
+{% endif %}
+{% if record.skillcomment_set.count > 0 %}
+<a href="{% url "private:feedback-detail-skills" pk=record.pk %}" class="badge badge-secondary">
+  {% blocktrans with skills=record.skillcomment_set.count %}
+  {{ skills }} skills
+  {% endblocktrans %}
+</a>
+{% endif %}

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+
 import saml2
 import saml2.attributemaps
 import saml2.saml
@@ -29,9 +30,8 @@ INTERNAL_IPS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "LZK.public",
-    "LZK.private",
     "LZK",
+    "LZK.private",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -53,12 +53,12 @@ INSTALLED_APPS = [
     "ordered_model",
     "imagekit",
     "django_tables2",
-    'haystack',
-    'debug_toolbar',
+    "haystack",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.locale.LocaleMiddleware",
@@ -95,9 +95,9 @@ TEMPLATES = [
 WSGI_APPLICATION = "LZK.wsgi.application"
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
     }
 }
 ATOMIC_REQUESTS = True
@@ -122,8 +122,8 @@ AUTH_USER_MODEL = "LZK.User"
 LANGUAGE_CODE = "de"
 
 LANGUAGES = [
-    ('de', _('German')),
-    ('en', _('English')),
+    ("de", _("German")),
+    ("en", _("English")),
 ]
 
 TIME_ZONE = "UTC"
@@ -166,26 +166,26 @@ HAYSTACK_CONNECTIONS = {
     #'default': {
     #    'ENGINE': 'xapian_backend.XapianEngine',
     #    'PATH': os.path.join(os.path.dirname(__file__), 'xapian_index'),
-    #},
-    'default': {
-        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
-        'PATH': os.path.join(BASE_DIR, "index")
+    # },
+    "default": {
+        "ENGINE": "haystack.backends.whoosh_backend.WhooshEngine",
+        "PATH": os.path.join(BASE_DIR, "index"),
     },
 }
-HAYSTACK_SIGNAL_PROCESSOR = 'LZK.haystack.SignalProcessor'
+HAYSTACK_SIGNAL_PROCESSOR = "LZK.haystack.SignalProcessor"
 
 COMPRESS_PRECOMPILERS = [("text/x-scss", "LZK.compressor.DjangoSassCompiler")]
 
 LOGIN_URL = reverse("login")
 LOGIN_REDIRECT_URL = reverse("private:index")
-LOGOUT_REDIRECT_URL = reverse("public:index")
+LOGOUT_REDIRECT_URL = reverse("index")
 
 SAML_CREATE_UNKNOWN_USER = True
 SAML_ATTRIBUTE_MAPPING = {
     "uid": ("username",),
-    'mail': ('email', ),
-    'givenName': ('first_name', ),
-    'sn': ('last_name', ),
+    "mail": ("email",),
+    "givenName": ("first_name",),
+    "sn": ("last_name",),
 }
 SAML_LOGOUT_REQUEST_PREFERRED_BINDING = saml2.BINDING_HTTP_POST
 SAML_IGNORE_LOGOUT_ERRORS = True
