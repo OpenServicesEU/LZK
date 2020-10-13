@@ -55,7 +55,7 @@ class FileValidator:
 
         # Check the content type
         mimetype, _ = mimetypes.guess_type(value.name)
-        if self.mimetypes and mimetype not in self.mimetypes:
+        if mimetype and self.mimetypes and mimetype not in self.mimetypes:
             message = self.mimetype_message % {
                 "mimetype": mimetype,
                 "mimetypes": ", ".join(self.mimetypes),
