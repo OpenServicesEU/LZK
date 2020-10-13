@@ -42,9 +42,11 @@ class AbilityListView(SingleTableMixin, FilterView):
     template_name = "LZK/ability/list.html"
     filterset_class = filters.AbilityFilter
     paginate_by = 10
-    extra_context = {
-        "texts": models.Text.objects.filter(placement=models.Text.ABILITIES)
-    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["texts"] = models.Text.objects.filter(placement=models.Text.ABILITIES)
+        return context
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -66,9 +68,11 @@ class SymptomListView(SingleTableMixin, FilterView):
     template_name = "LZK/symptom/list.html"
     filterset_class = filters.SymptomFilter
     paginate_by = 10
-    extra_context = {
-        "texts": models.Text.objects.filter(placement=models.Text.SYMPTOMS)
-    }
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["texts"] = models.Text.objects.filter(placement=models.Text.SYMPTOMS)
+        return context
 
     def get_queryset(self):
         qs = super().get_queryset()
@@ -87,7 +91,11 @@ class SymptomDetailView(DetailView):
 class CompetenceLevelView(ListView):
     model = models.CompetenceLevel
     template_name = "LZK/competence_level/list.html"
-    extra_context = {"texts": models.Text.objects.filter(placement=models.Text.SKILLS)}
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["texts"] = models.Text.objects.filter(placement=models.Text.SKILLS)
+        return context
 
     def get_queryset(self):
         qs = super().get_queryset()
