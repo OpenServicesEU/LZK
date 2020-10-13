@@ -89,14 +89,14 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
         symptom_data = list()
         symptom_subject_data = list()
         for row in islice(objective_sheet.iter_rows(), 1, None):
+            public = (row[13].value or "").strip().lower()
             if row[10].value.strip().lower() == settings.LZK_IMPORT_VALUE_TRUE.lower():
                 # Symptom
                 symptom_data.append(
                     {
                         "pk": row[0].value,
                         "name": row[1].value.strip(),
-                        "public": row[13].value.strip().lower
-                        == settings.LZK_IMPORT_VALUE_TRUE.lower(),
+                        "public": public == settings.LZK_IMPORT_VALUE_TRUE.lower(),
                     }
                 )
                 # Subjects
@@ -134,8 +134,7 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                         "depth": row[2].value,
                         "subject_related": row[9].value.strip().lower()
                         == settings.LZK_IMPORT_VALUE_TRUE.lower(),
-                        "public": row[13].value.strip().lower()
-                        == settings.LZK_IMPORT_VALUE_TRUE.lower(),
+                        "public": public == settings.LZK_IMPORT_VALUE_TRUE.lower(),
                     }
                 )
                 # Levels
