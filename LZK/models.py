@@ -36,7 +36,11 @@ class University(TimeStampedModel):
     url = models.URLField()
     logo = models.FileField(
         upload_to=Uuid4Upload,
-        validators=(FileValidator(mimetypes=["image/svg+xml"], extensions=["svg"]),),
+        validators=(
+            FileValidator(
+                mimetypes=["image/svg+xml", "image/webp"], extensions=["svg", "webp"]
+            ),
+        ),
     )
 
     class Meta:
