@@ -366,16 +366,18 @@ class Text(OrderedModel):
     ABILITIES = "abilities"
     SYMPTOMS = "symptoms"
     SKILLS = "skills"
+    HOMEPAGE = "homepage"
     FEEDBACK_EMAIL = "feedback-email"
     PLACEMENT_CHOICES = (
         (ABILITIES, _("Abilities")),
         (SYMPTOMS, _("Symptoms")),
         (SKILLS, _("Skills")),
+        (HOMEPAGE, _("Homepage")),
         (FEEDBACK_EMAIL, _("Feedback (Email)")),
     )
 
     title = models.CharField(max_length=128)
-    body = MarkupField(markup_type="restructuredtext")
+    body = models.TextField()
     placement = models.CharField(
         max_length=32, choices=PLACEMENT_CHOICES, default=ABILITIES,
     )

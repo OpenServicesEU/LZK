@@ -32,6 +32,7 @@ class IndexView(TemplateView):
             Q(active=None) | Q(active__lte=timezone.now())
         )[:10]
         context["downloads"] = models.Download.objects.filter(active=True)
+        context["texts"] = models.Text.objects.filter(placement=models.Text.HOMEPAGE)
         return context
 
 

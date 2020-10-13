@@ -33,6 +33,14 @@
 </div>
 <div class="row mt-2">
   <div class="col-sm">
+    {% for text in texts %}
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{ text.title }}</h3>
+        <p class="card-text">{{ text.body|safe }}</p>
+      </div>
+    </div>
+    {% endfor %}
     {% for entry in news %}
     <div class="card">
       <div class="card-body">
