@@ -155,7 +155,7 @@ class Ability(TimeStampedModel):
     depth = models.PositiveSmallIntegerField(
         choices=[(1, "1"), (2, "2")], verbose_name=_("Depth"), blank=True, null=True
     )
-    levels = models.ManyToManyField("Level")
+    levels = models.ManyToManyField("Level", blank=True)
     subjects = models.ManyToManyField("Subject")
     subject_related = models.BooleanField(verbose_name=_("Subject related"))
     systems = models.ManyToManyField("System", blank=True)
