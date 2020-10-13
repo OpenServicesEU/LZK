@@ -95,7 +95,7 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                     {
                         "pk": row[0].value,
                         "name": row[1].value.strip(),
-                        "public": row[14].value.strip().lower
+                        "public": row[13].value.strip().lower
                         == settings.LZK_IMPORT_VALUE_TRUE.lower(),
                     }
                 )
@@ -134,7 +134,7 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                         "depth": row[2].value,
                         "subject_related": row[9].value.strip().lower()
                         == settings.LZK_IMPORT_VALUE_TRUE.lower(),
-                        "public": row[14].value.strip().lower()
+                        "public": row[13].value.strip().lower()
                         == settings.LZK_IMPORT_VALUE_TRUE.lower(),
                     }
                 )
