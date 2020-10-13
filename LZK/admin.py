@@ -135,3 +135,6 @@ class TextAdmin(OrderedModelAdmin):
     list_display = ("title", "placement")
     list_filter = ("placement",)
     search_fields = ("title", "body")
+
+    class Media:
+        js = ("ckeditor/ckeditor.js", "LZK/admin/text.js")

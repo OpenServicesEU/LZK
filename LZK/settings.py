@@ -157,6 +157,7 @@ SYSTEM_STATIC_PATHS = {
     "fonts-fork-awesome/": ("/usr/share/fonts-fork-awesome",),
     "jquery/": ("/usr/share/nodejs/jquery/dist",),
     "popper/": ("/usr/share/nodejs/popper.js/dist/umd",),
+    "ckeditor/": ("/usr/share/javascript/ckeditor",),
 }
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
