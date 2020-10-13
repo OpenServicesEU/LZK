@@ -52,7 +52,7 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownUserLink">
           {% include "LZK/private/nav.html" %}
-          {% if user.is_superuser %}
+          {% if user.is_staff %}
           <a class="dropdown-item" href="{% url 'admin:index' %}">
             <i class="fa fa-cogs" aria-hidden="true"></i>
             {% trans "Administration" %}
