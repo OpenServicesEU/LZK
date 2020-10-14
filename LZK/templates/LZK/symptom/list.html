@@ -14,7 +14,7 @@
 <section class="row">
   <div class="col-md">
   {% for text in texts %}
-  {{ text.body }}
+  {{ text.body|safe }}
   {% endfor %}
   </div>
 </section>
