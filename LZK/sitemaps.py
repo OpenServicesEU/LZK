@@ -6,6 +6,7 @@ from django.urls import reverse
 
 
 class StaticViewSitemap(Sitemap):
+    protocol = "https"
     priority = 1.0
     changefreq = "monthly"
 
@@ -22,6 +23,7 @@ class StaticViewSitemap(Sitemap):
 
 
 class AbilitySitemap(Sitemap):
+    protocol = "https"
     changefreq = "monthly"
     priority = 0.5
 
@@ -30,6 +32,7 @@ class AbilitySitemap(Sitemap):
 
 
 class SymptomSitemap(Sitemap):
+    protocol = "https"
     changefreq = "monthly"
     priority = 0.5
 
@@ -38,6 +41,7 @@ class SymptomSitemap(Sitemap):
 
 
 class SkillSitemap(Sitemap):
+    protocol = "https"
     changefreq = "monthly"
     priority = 0.5
 
