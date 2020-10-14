@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "imagekit",
     "django_tables2",
     "haystack",
+    "analytical",
     "debug_toolbar",
 ]
 

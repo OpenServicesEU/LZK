@@ -2,9 +2,10 @@
 {% load static %}
 {% load i18n %}
 {% load compress %}
+{% load analytical %}
 <html lang="{{ LANGUAGE_CODE }}">
   <head>
-    <!-- Required meta tags -->
+    {% analytical_head_top %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="icon" href="{% static "LZK/favicon.svg" %}">
@@ -12,10 +13,11 @@
     <link rel="stylesheet" href="{% static "fonts-fork-awesome/scss/fork-awesome.scss" %}" type="text/x-scss" charset="utf-8">
     <link rel="stylesheet" href="{% static "LZK/style.scss" %}" type="text/x-scss" charset="utf-8">
     {% endcompress %}
-
     <title>{% trans "Lernzielkatalog Medizin" %}</title>
+    {% analytical_head_bottom %}
   </head>
   <body>
+    {% analytical_body_top %}
     {% block body %}{% endblock %}
     {% compress js %}
     <script src="{% static "jquery/jquery.js" %}"></script>
@@ -23,5 +25,6 @@
     <script src="{% static "bootstrap/dist/js/bootstrap.js" %}"></script>
     <script src="{% static "LZK/global.js" %}"></script>
     {% endcompress %}
+    {% analytical_body_bottom %}
   </body>
 </html>
