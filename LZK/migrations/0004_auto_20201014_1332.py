@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('LZK', '0003_auto_20201013_1415'),
+        ("LZK", "0003_auto_20201013_1415"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='ability',
-            name='levels',
-            field=models.ManyToManyField(blank=True, to='LZK.Level'),
+            model_name="ability",
+            name="levels",
+            field=models.ManyToManyField(blank=True, to="LZK.Level"),
         ),
     ]
