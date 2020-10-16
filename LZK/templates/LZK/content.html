@@ -75,4 +75,11 @@
 </nav>
 {% block content %}
 {% endblock %}
+<footer class="footer">
+  <div class="container">
+    <span class="text-muted">
+      &copy; {% now "Y" %} {{ copyright }} | <a href="{% url "about" %}">{% trans "About us" %}</a>
+    </span>
+  </div>
+</footer>
 {% endblock %}

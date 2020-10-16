@@ -367,12 +367,14 @@ class Text(OrderedModel):
     SYMPTOMS = "symptoms"
     SKILLS = "skills"
     HOMEPAGE = "homepage"
+    ABOUT = "about"
     FEEDBACK_EMAIL = "feedback-email"
     PLACEMENT_CHOICES = (
         (ABILITIES, _("Abilities")),
         (SYMPTOMS, _("Symptoms")),
         (SKILLS, _("Skills")),
         (HOMEPAGE, _("Homepage")),
+        (ABOUT, _("About us")),
         (FEEDBACK_EMAIL, _("Feedback (Email)")),
     )
 

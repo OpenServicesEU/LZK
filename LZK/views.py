@@ -36,6 +36,15 @@ class IndexView(TemplateView):
         return context
 
 
+class AboutView(TemplateView):
+    template_name = "LZK/about.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["texts"] = models.Text.objects.filter(placement=models.Text.ABOUT)
+        return context
+
+
 class AbilityListView(SingleTableMixin, FilterView):
     model = models.Ability
     table_class = tables.AbilityTable

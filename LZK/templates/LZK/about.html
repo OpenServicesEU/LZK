@@ -1,0 +1,22 @@
+{% extends "LZK/content.html" %}
+
+{% load static %}
+{% load i18n %}
+{% load imagekit %}
+
+{% block content %}
+<main role="main" class="container">
+<div class="row">
+  <div class="col-sm">
+    {% for text in texts %}
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title">{{ text.title }}</h3>
+        <p class="card-text">{{ text.body|safe }}</p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+</main>
+{% endblock %}

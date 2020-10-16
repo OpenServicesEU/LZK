@@ -31,6 +31,7 @@ urlpatterns = [
         name="django.contrib.sitemaps.views.sitemap",
     ),
     path("", views.IndexView.as_view(), name="index"),
+    path("about/", views.AboutView.as_view(), name="about"),
     path("search/", views.SearchView.as_view(), name="search"),
     path("abilities/", views.AbilityListView.as_view(), name="ability-list"),
     path(
