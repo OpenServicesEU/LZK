@@ -11,7 +11,7 @@ $jumbotron-bg: rgb(0,130,145);
 $footer-height: 60px;
 body {
   padding-top: 4.5rem;
-  margin-bottom: $footer-height;
+  margin-bottom: $footer-height !important;
 }
 .navbar {
   border-bottom: 0.25rem solid $dark;
