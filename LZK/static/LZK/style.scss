@@ -9,6 +9,8 @@ $theme-colors: (
 $jumbotron-color: rgb(255,255,255);
 $jumbotron-bg: rgb(0,130,145);
 $footer-height: 60px;
+@import "fonts.scss";
+@import "bootstrap/bootstrap.scss";
 body {
   padding-top: 4.5rem;
   margin-bottom: $footer-height !important;
@@ -40,8 +42,6 @@ body {
 span.asteriskField {
   display: none;
 }
-@import "fonts.scss";
-@import "bootstrap/bootstrap.scss";
 //@import "fonts-fork-awesome/scss/fork-awesome.scss";
 .carousel-caption {
   background-color: RGBA(45, 122, 117, 0.6);
