@@ -320,7 +320,6 @@ class SkillComment(Comment):
 
 class Slide(OrderedModel):
     title = models.CharField(max_length=128)
-    description = MarkupField(markup_type="restructuredtext")
     active = models.BooleanField(default=True)
     image = models.ImageField(upload_to=Uuid4Upload)
 
