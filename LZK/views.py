@@ -127,6 +127,10 @@ class ActivityView(SingleTableMixin, SingleObjectMixin, FilterView):
     def get_table_data(self):
         return self.object.skill_set.all()
 
+    def get_filterset_kwargs(self, filterset_class):
+        kwargs = super().get_filterset_kwargs(filterset_class)
+        kwargs["queryset"] = self.object.skill_set.all()
+        return kwargs
 
 class SkillDetailView(DetailView):
     model = models.Skill
