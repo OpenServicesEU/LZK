@@ -159,7 +159,7 @@ STATICFILES_DIRS = [
 SYSTEM_STATIC_PATHS = {
     "bootstrap/": ("/usr/share/sass/bootstrap", "/usr/share/nodejs/bootstrap",),
     "fonts-fork-awesome/": ("/usr/share/fonts-fork-awesome",),
-    "jquery/": ("/usr/share/nodejs/jquery/dist",),
+    "jquery/": ("/usr/share/javascript/jquery",),
     "popper/": ("/usr/share/nodejs/popper.js/dist/umd",),
     "ckeditor/": ("/usr/share/javascript/ckeditor",),
 }
