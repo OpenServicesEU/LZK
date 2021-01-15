@@ -5,18 +5,22 @@
 {% block body %}
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white">
   <div class="container">
-  <a class="navbar-brand d-none d-xl-block" href="/">
-    <i class="fa fa-home" aria-hidden="true"></i>
-    {% trans "Lernzielkatalog Österreich" %}
-  </a>
-  <a class="navbar-brand d-xl-none" href="/">
-    <i class="fa fa-home" aria-hidden="true"></i>
-    {% trans "LZK-Ö" %}
+  <a class="navbar-brand" href="/">
+    <i class="fa fa-home fa-3x" aria-hidden="true"></i>
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarCollapse">
+  <div class="collapse navbar-collapse flex-column align-items-start ml-lg-2 ml-0" id="navbarCollapse">
+    <div class="d-none d-xl-flex justify-content-center w-100">
+      <h2 id="title">
+      {% trans "Klinischer Lernzielkatalog Österreich" %}
+      </h2>
+    </div>
+    <div class="d-xl-none">
+      {% trans "LZK-Ö" %}
+    </div>
+    <div class="navbar-nav flex-row mb-md-1 mt-md-0 mb-3 mt-2 w-100">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
         <a class="nav-link" href="{% url "symptom-list" %}">
@@ -70,6 +74,7 @@
       {% trans "Login" %}
     </a>
     {% endif %}
+  </div>
   </div>
   </div>
 </nav>

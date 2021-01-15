@@ -12,7 +12,7 @@ $footer-height: 60px;
 @import "fonts.scss";
 @import "bootstrap/bootstrap.scss";
 body {
-  padding-top: 4.5rem;
+  padding-top: 7rem;
   margin-bottom: $footer-height !important;
 }
 .navbar {
@@ -31,8 +31,14 @@ body {
 .modal-title.mdi::before { margin: 0 4px 0 0; }
 .nav-link.mdi::before { margin: 0 4px 0 -4px; }
 .navbar-brand {
-  font-family: "Corporate A";
+  .fa {
+    color: $dark;
+  }
   &.mdi::before { margin: 0 4px 0 0; }
+}
+#title {
+  font-family: "Corporate A";
+  color: $dark;
 }
 .popover-title.mdi::before { margin: 0 4px 0 -4px; }
 // Collapse Demo
