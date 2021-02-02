@@ -40,6 +40,22 @@
           {% trans "Skills" %}
         </a>
       </li>
+      {% if top_downloads|length > 0 %}
+      <div class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownDownloadLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-download" aria-hidden="true"></i>
+          {% trans "Downloads" %}
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownDownloadLink">
+          {% for download in top_downloads %}
+          <a class="dropdown-item" href="{{ download.file.url }}">
+            <i class="fa fa-{{ download.icon }}" aria-hidden="true"></i>
+            {{ download.title }}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
+      {% endif %}
     </ul>
     <form class="form-inline mt-2 mt-md-0" action="{% url "search" %}">
       <div class="input-group mr-sm-2">

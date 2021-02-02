@@ -1,4 +1,6 @@
 import logging
+import magic
+import mimeparse
 from uuid import uuid4
 
 from django.contrib.auth.models import AbstractUser
@@ -350,7 +352,9 @@ class Download(TimeStampedModel):
     title = models.CharField(max_length=128)
     body = MarkupField(markup_type="restructuredtext")
     active = models.BooleanField(default=True, verbose_name=_("Active"))
+    top = models.BooleanField(default=False, verbose_name=_("Top-Download"))
     file = models.FileField(upload_to="uploads/")
+    icon = models.TextField(default="file-o")
 
     class Meta:
         verbose_name = _("Download")
@@ -358,6 +362,32 @@ class Download(TimeStampedModel):
 
     def __str__(self):
         return self.title
+
+    @staticmethod
+    @receiver(models.signals.pre_save, sender="LZK.Download")
+    def pre_save(sender, instance, raw, **kwargs):
+        icons = {
+            ("audio",): "file-audio-o",
+            ("image",): "file-image-o",
+            ("video",): "file-video-o",
+            ("text",): "file-text-o",
+            ("application", "pdf"): "file-pdf-o",
+            ("application", "zip"): "file-archive-o",
+        }
+        instance.file.seek(0)
+        mimetype = magic.from_buffer(
+            instance.file.read(2048),
+            mime=True
+        )
+        instance.file.seek(0)
+        maintype, subtype, _ = mimeparse.parse_mime_type(mimetype)
+        instance.icon = icons.get(
+            (maintype, subtype),
+            icons.get(
+                (maintype,),
+                "file-o"
+            )
+        )
 
 
 class Text(OrderedModel):

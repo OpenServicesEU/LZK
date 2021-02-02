@@ -91,6 +91,7 @@ TEMPLATES = [
                 "django.contrib.messages.context_processors.messages",
                 "LZK.context_processors.login_url",
                 "LZK.context_processors.copyright",
+                "LZK.context_processors.top_downloads",
             ]
         },
     }

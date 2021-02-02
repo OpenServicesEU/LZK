@@ -123,11 +123,14 @@ class SlideAdmin(OrderedModelAdmin):
 @admin.register(models.News)
 class NewsAdmin(admin.ModelAdmin):
     list_display = ("title", "active", "datetime")
+    search_fields = ("title",)
 
 
 @admin.register(models.Download)
 class DownloadAdmin(admin.ModelAdmin):
-    list_display = ("title",)
+    list_display = ("title", "active", "top")
+    list_filter = ("active", "top")
+    exclude = ("icon",)
 
 
 @admin.register(models.Text)
