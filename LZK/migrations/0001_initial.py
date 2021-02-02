@@ -67,7 +67,9 @@ class Migration(migrations.Migration):
                 "verbose_name_plural": "Abilities",
                 "ordering": ("name",),
             },
-            managers=[("objects", psqlextra.manager.manager.PostgresManager()),],
+            managers=[
+                ("objects", psqlextra.manager.manager.PostgresManager()),
+            ],
         ),
         migrations.CreateModel(
             name="Activity",
@@ -88,7 +90,9 @@ class Migration(migrations.Migration):
                 "verbose_name_plural": "Activities",
                 "ordering": ("name",),
             },
-            managers=[("objects", psqlextra.manager.manager.PostgresManager()),],
+            managers=[
+                ("objects", psqlextra.manager.manager.PostgresManager()),
+            ],
         ),
         migrations.CreateModel(
             name="CompetenceLevel",
@@ -164,7 +168,10 @@ class Migration(migrations.Migration):
                 ("_body_rendered", models.TextField(editable=False)),
                 ("file", models.FileField(upload_to="uploads/")),
             ],
-            options={"verbose_name": "Download", "verbose_name_plural": "Downloads",},
+            options={
+                "verbose_name": "Download",
+                "verbose_name_plural": "Downloads",
+            },
         ),
         migrations.CreateModel(
             name="Feedback",
@@ -216,7 +223,10 @@ class Migration(migrations.Migration):
                 ("_notes_rendered", models.TextField(editable=False)),
                 ("activities", models.ManyToManyField(to="LZK.Activity")),
             ],
-            options={"verbose_name": "Feedback", "verbose_name_plural": "Feedbacks",},
+            options={
+                "verbose_name": "Feedback",
+                "verbose_name_plural": "Feedbacks",
+            },
         ),
         migrations.CreateModel(
             name="Level",
@@ -249,7 +259,9 @@ class Migration(migrations.Migration):
                 "verbose_name_plural": "Levels",
                 "ordering": ("id",),
             },
-            managers=[("objects", psqlextra.manager.manager.PostgresManager()),],
+            managers=[
+                ("objects", psqlextra.manager.manager.PostgresManager()),
+            ],
         ),
         migrations.CreateModel(
             name="News",
@@ -327,7 +339,9 @@ class Migration(migrations.Migration):
                 "verbose_name_plural": "Skills",
                 "ordering": ("name",),
             },
-            managers=[("objects", psqlextra.manager.manager.PostgresManager()),],
+            managers=[
+                ("objects", psqlextra.manager.manager.PostgresManager()),
+            ],
         ),
         migrations.CreateModel(
             name="Slide",
@@ -394,7 +408,9 @@ class Migration(migrations.Migration):
                 "verbose_name_plural": "Study fields",
                 "ordering": ("name",),
             },
-            managers=[("objects", psqlextra.manager.manager.PostgresManager()),],
+            managers=[
+                ("objects", psqlextra.manager.manager.PostgresManager()),
+            ],
         ),
         migrations.CreateModel(
             name="Subject",
@@ -427,7 +443,9 @@ class Migration(migrations.Migration):
                 "verbose_name_plural": "Subjects",
                 "ordering": ("id",),
             },
-            managers=[("objects", psqlextra.manager.manager.PostgresManager()),],
+            managers=[
+                ("objects", psqlextra.manager.manager.PostgresManager()),
+            ],
         ),
         migrations.CreateModel(
             name="Symptom",
@@ -462,7 +480,9 @@ class Migration(migrations.Migration):
                 "verbose_name_plural": "Symptoms",
                 "ordering": ("name",),
             },
-            managers=[("objects", psqlextra.manager.manager.PostgresManager()),],
+            managers=[
+                ("objects", psqlextra.manager.manager.PostgresManager()),
+            ],
         ),
         migrations.CreateModel(
             name="System",
@@ -483,7 +503,9 @@ class Migration(migrations.Migration):
                 "verbose_name_plural": "Systems",
                 "ordering": ("name",),
             },
-            managers=[("objects", psqlextra.manager.manager.PostgresManager()),],
+            managers=[
+                ("objects", psqlextra.manager.manager.PostgresManager()),
+            ],
         ),
         migrations.CreateModel(
             name="Text",
@@ -535,7 +557,10 @@ class Migration(migrations.Migration):
                 ),
                 ("_body_rendered", models.TextField(editable=False)),
             ],
-            options={"verbose_name": "Text", "verbose_name_plural": "Texts",},
+            options={
+                "verbose_name": "Text",
+                "verbose_name_plural": "Texts",
+            },
         ),
         migrations.CreateModel(
             name="UFID",
@@ -548,7 +573,9 @@ class Migration(migrations.Migration):
                 "verbose_name_plural": "UFIDs",
                 "ordering": ("id",),
             },
-            managers=[("objects", psqlextra.manager.manager.PostgresManager()),],
+            managers=[
+                ("objects", psqlextra.manager.manager.PostgresManager()),
+            ],
         ),
         migrations.CreateModel(
             name="University",
@@ -714,7 +741,9 @@ class Migration(migrations.Migration):
                 "verbose_name_plural": "users",
                 "abstract": False,
             },
-            managers=[("objects", django.contrib.auth.models.UserManager()),],
+            managers=[
+                ("objects", django.contrib.auth.models.UserManager()),
+            ],
         ),
         migrations.CreateModel(
             name="SymptomComment",
@@ -855,7 +884,9 @@ class Migration(migrations.Migration):
                 "verbose_name_plural": "module tracks",
                 "ordering": ("name",),
             },
-            managers=[("objects", psqlextra.manager.manager.PostgresManager()),],
+            managers=[
+                ("objects", psqlextra.manager.manager.PostgresManager()),
+            ],
         ),
         migrations.AddField(
             model_name="feedback",

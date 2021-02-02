@@ -123,7 +123,10 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                     if act not in activity_data:
                         activity_data[act] = cl.upper()
                     skill_data.append(
-                        {"pk": row[0].value, "name": row[1].value.strip(),}
+                        {
+                            "pk": row[0].value,
+                            "name": row[1].value.strip(),
+                        }
                     )
                     skill_activity_map[row[0].value] = act
             else:
@@ -199,7 +202,12 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
         ).bulk_insert(({**v, **{"pk": k}} for k, v in study_field_data.items()))
 
         ability_data_update = [
-            {**o, **{"study_field_id": ability_study_field_data.get(o.get("pk")),},}
+            {
+                **o,
+                **{
+                    "study_field_id": ability_study_field_data.get(o.get("pk")),
+                },
+            }
             for o in ability_data
             if o.get("pk") in ability_study_field_data
         ]

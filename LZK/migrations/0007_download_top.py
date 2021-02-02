@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('LZK', '0006_auto_20201109_0946'),
+        ("LZK", "0006_auto_20201109_0946"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='download',
-            name='top',
-            field=models.BooleanField(default=False, verbose_name='Top-Download'),
+            model_name="download",
+            name="top",
+            field=models.BooleanField(default=False, verbose_name="Top-Download"),
         ),
     ]

@@ -12,7 +12,9 @@ from . import forms, sitemaps, views
 
 urlpatterns = [
     path(
-        "login/", LoginView.as_view(form_class=forms.AuthenticationForm), name="login",
+        "login/",
+        LoginView.as_view(form_class=forms.AuthenticationForm),
+        name="login",
     ),
     path("logout/", LogoutView.as_view(), name="logout"),
     path("admin/", admin.site.urls),

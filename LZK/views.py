@@ -132,6 +132,7 @@ class ActivityView(SingleTableMixin, SingleObjectMixin, FilterView):
         kwargs["queryset"] = self.object.skill_set.all()
         return kwargs
 
+
 class SkillDetailView(DetailView):
     model = models.Skill
     template_name = "LZK/skill/detail.html"
@@ -164,7 +165,10 @@ class CommentMixin(object):
                 % {"verbose_name": self.comment._meta.verbose_name}
             )
         comment, created = self.model.objects.get_or_create(
-            **{self.relation: obj, "feedback": self.feedback,}
+            **{
+                self.relation: obj,
+                "feedback": self.feedback,
+            }
         )
         if created:
             logger.info(f"Created new comment by {self.feedback} for {obj}")

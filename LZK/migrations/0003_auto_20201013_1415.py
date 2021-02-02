@@ -10,10 +10,18 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(model_name="text", name="_body_rendered",),
-        migrations.RemoveField(model_name="text", name="body_markup_type",),
+        migrations.RemoveField(
+            model_name="text",
+            name="_body_rendered",
+        ),
+        migrations.RemoveField(
+            model_name="text",
+            name="body_markup_type",
+        ),
         migrations.AlterField(
-            model_name="text", name="body", field=models.TextField(),
+            model_name="text",
+            name="body",
+            field=models.TextField(),
         ),
         migrations.AlterField(
             model_name="text",

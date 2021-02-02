@@ -28,7 +28,8 @@ class CommentForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.helper.form_action = reverse(
-            "comment-ability", kwargs={"pk": kwargs.get("instance").ability.pk},
+            "comment-ability",
+            kwargs={"pk": kwargs.get("instance").ability.pk},
         )
 
     class Meta:
@@ -43,7 +44,9 @@ class CommentForm(forms.ModelForm):
         Field("comment"),
         Div(
             StrictButton(
-                "Submit feedback", css_class="btn-primary btn-block", type="submit",
+                "Submit feedback",
+                css_class="btn-primary btn-block",
+                type="submit",
             ),
             css_class="form-group",
         ),

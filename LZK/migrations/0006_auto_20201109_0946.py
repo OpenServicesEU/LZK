@@ -6,20 +6,20 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('LZK', '0005_auto_20201016_1032'),
+        ("LZK", "0005_auto_20201016_1032"),
     ]
 
     operations = [
         migrations.RemoveField(
-            model_name='slide',
-            name='_description_rendered',
+            model_name="slide",
+            name="_description_rendered",
         ),
         migrations.RemoveField(
-            model_name='slide',
-            name='description',
+            model_name="slide",
+            name="description",
         ),
         migrations.RemoveField(
-            model_name='slide',
-            name='description_markup_type',
+            model_name="slide",
+            name="description_markup_type",
         ),
     ]

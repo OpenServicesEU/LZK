@@ -375,19 +375,10 @@ class Download(TimeStampedModel):
             ("application", "zip"): "file-archive-o",
         }
         instance.file.seek(0)
-        mimetype = magic.from_buffer(
-            instance.file.read(2048),
-            mime=True
-        )
+        mimetype = magic.from_buffer(instance.file.read(2048), mime=True)
         instance.file.seek(0)
         maintype, subtype, _ = mimeparse.parse_mime_type(mimetype)
-        instance.icon = icons.get(
-            (maintype, subtype),
-            icons.get(
-                (maintype,),
-                "file-o"
-            )
-        )
+        instance.icon = icons.get((maintype, subtype), icons.get((maintype,), "file-o"))
 
 
 class Text(OrderedModel):
@@ -410,7 +401,9 @@ class Text(OrderedModel):
     title = models.CharField(max_length=128)
     body = models.TextField()
     placement = models.CharField(
-        max_length=32, choices=PLACEMENT_CHOICES, default=ABILITIES,
+        max_length=32,
+        choices=PLACEMENT_CHOICES,
+        default=ABILITIES,
     )
     order_with_respect_to = "placement"
 

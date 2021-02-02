@@ -15,7 +15,10 @@ class ImportForm(forms.Form):
     file = forms.FileField(
         validators=[
             FileValidator(
-                extensions=["xlsx", "xlsm",],
+                extensions=[
+                    "xlsx",
+                    "xlsm",
+                ],
                 mimetypes=[
                     "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                     "application/vnd.ms-excel.sheet.macroEnabled.12",
