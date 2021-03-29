@@ -1,97 +1,104 @@
 {% extends "LZK/base.html" %}
 
+{% load static %}
 {% load i18n %}
 
 {% block body %}
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white">
   <div class="container">
-  <a class="navbar-brand" href="/">
-    <i class="fa fa-home fa-3x" aria-hidden="true"></i>
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse flex-column align-items-start ml-lg-2 ml-0" id="navbarCollapse">
-    <div class="d-none d-xl-flex justify-content-center w-100">
-      <h2 id="title">
-      {% trans "Klinischer Lernzielkatalog Österreich" %}
-      </h2>
-    </div>
+    <a class="navbar-brand" href="/">
+      <i class="fa fa-home fa-3x" aria-hidden="true"></i>
+    </a>
     <div class="d-xl-none">
       {% trans "LZK-Ö" %}
     </div>
-    <div class="navbar-nav flex-row mb-md-1 mt-md-0 mb-3 mt-2 w-100">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="{% url "symptom-list" %}">
-          <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-          {% trans "Symptoms" %}
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url "ability-list" %}">
-          <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-          {% trans "Abilities" %}
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url "skill-list" %}">
-          <i class="fa fa-graduation-cap" aria-hidden="true"></i>
-          {% trans "Skills" %}
-        </a>
-      </li>
-      {% if top_downloads|length > 0 %}
-      <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownDownloadLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-download" aria-hidden="true"></i>
-          {% trans "Downloads" %}
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownDownloadLink">
-          {% for download in top_downloads %}
-          <a class="dropdown-item" href="{{ download.file.url }}">
-            <i class="fa fa-{{ download.icon }}" aria-hidden="true"></i>
-            {{ download.title }}
-          </a>
-          {% endfor %}
-        </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse flex-column align-items-start ml-lg-2 ml-0" id="navbarCollapse">
+      <div class="d-none d-xl-flex justify-content-center w-100">
+        <h2 id="title">
+        {% trans "Klinischer Lernzielkatalog Österreich" %}
+        </h2>
       </div>
-      {% endif %}
-    </ul>
-    <form class="form-inline mt-2 mt-md-0" action="{% url "search" %}">
-      <div class="input-group mr-sm-2">
-        <input type="text" class="form-control" name="q" placeholder="{% trans "Suche" %}" aria-label="{% trans "Suche" %}" aria-describedby="nav-button-search">
-        <div class="input-group-append">
-          <button class="btn btn-outline-light" type="submit" id="nav-button-search"><i class="fa fa-search" aria-hidden="true"></i></button>
-        </div>
-      </div>
-    </form>
-    {% if user.is_authenticated %}
-      <div class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownUserLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fa fa-user-circle" aria-hidden="true"></i>
-        </a>
-        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownUserLink">
-          {% include "LZK/private/nav.html" %}
-          {% if user.is_staff %}
-          <a class="dropdown-item" href="{% url 'admin:index' %}">
-            <i class="fa fa-cogs" aria-hidden="true"></i>
-            {% trans "Administration" %}
-          </a>
+      <div class="navbar-nav flex-row mb-md-1 mt-md-0 mb-3 mt-2 w-100">
+        <ul class="navbar-nav mr-auto my-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url "symptom-list" %}">
+              <i class="fa fa-graduation-cap d-none d-xl-inline" aria-hidden="true"></i>
+              {% trans "Symptoms" %}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url "ability-list" %}">
+              <i class="fa fa-graduation-cap d-none d-xl-inline" aria-hidden="true"></i>
+              {% trans "Abilities" %}
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url "skill-list" %}">
+              <i class="fa fa-graduation-cap d-none d-xl-inline" aria-hidden="true"></i>
+              {% trans "Skills" %}
+            </a>
+          </li>
+          {% if top_downloads|length > 0 %}
+          <div class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownDownloadLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-download d-none d-xl-inline" aria-hidden="true"></i>
+              {% trans "Downloads" %}
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownDownloadLink">
+              {% for download in top_downloads %}
+              <a class="dropdown-item" href="{{ download.file.url }}">
+                <i class="fa fa-{{ download.icon }}" aria-hidden="true"></i>
+                {{ download.title }}
+              </a>
+              {% endfor %}
+            </div>
+          </div>
           {% endif %}
-          <a class="dropdown-item" href="{% url 'logout' %}">
-            <i class="fa fa-sign-out" aria-hidden="true"></i>
-            {% trans "Logout" %}
-          </a>
+        </ul>
+        <div class="btn-group">
+          <form class="form-inline btn mt-2 mt-md-0" action="{% url "search" %}">
+            <div class="input-group">
+              <input type="text" class="form-control" name="q" placeholder="{% trans "Search" %}" aria-label="{% trans "Search" %}" aria-describedby="nav-button-search">
+              <div class="input-group-append">
+                <button class="btn btn-outline-light" type="submit" id="nav-button-search">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+          {% if user.is_authenticated %}
+          <div class="dropdown btn">
+            <a class="dropdown-toggle btn btn-outline-light my-2 my-sm-0" href="#" id="navbarDropdownUserLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-user-circle" aria-hidden="true"></i>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownUserLink">
+              {% include "LZK/private/nav.html" %}
+              {% if user.is_staff %}
+              <a class="dropdown-item" href="{% url 'admin:index' %}">
+                <i class="fa fa-cogs" aria-hidden="true"></i>
+                {% trans "Administration" %}
+              </a>
+              {% endif %}
+              <a class="dropdown-item" href="{% url 'logout' %}">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                {% trans "Logout" %}
+              </a>
+            </div>
+          </div>
+          {% else %}
+          <div class="btn">
+            <a class="btn btn-outline-light my-2 my-sm-0" href="{{ login_url }}">
+              <i class="fa fa-sign-in" aria-hidden="true"></i>
+              {% trans "Login" %}
+            </a>
+          </div>
+          {% endif %}
         </div>
       </div>
-    {% else %}
-    <a class="btn btn-outline-light my-2 my-sm-0" href="{{ login_url }}">
-      <i class="fa fa-sign-in" aria-hidden="true"></i>
-      {% trans "Login" %}
-    </a>
-    {% endif %}
-  </div>
-  </div>
+    </div>
   </div>
 </nav>
 {% block content %}

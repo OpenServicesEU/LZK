@@ -20,6 +20,21 @@
   <body class="mb-5">
     {% analytical_body_top %}
     {% block body %}{% endblock %}
+      <div class="position-fixed language-selector btn-group dropup d-none d-sm-block">
+        <button type="button" class="btn btn-outline-light btn-block dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-language" aria-hidden="true"></i>
+          <span class="d-none d-md-inline">
+            {% trans "Language" %}
+          </span>
+        </button>
+        <div class="dropdown-menu">
+          {% for code, title in LANGUAGES %}
+          <a class="dropdown-item" href="?language={{ code }}">
+            {{ title }}
+          </a>
+          {% endfor %}
+        </div>
+      </div>
     {% compress js %}
     <script src="{% static "jquery/jquery.js" %}"></script>
     <script src="{% static "popper/popper.js" %}"></script>

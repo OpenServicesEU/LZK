@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-12 23:22+0200\n"
+"POT-Creation-Date: 2021-03-09 16:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,26 +22,26 @@ msgstr ""
 msgid "Lernzielkatalog (Private)"
 msgstr ""
 
-#: LZK/private/filters.py:28 LZK/private/filters.py:55
-#: LZK/private/filters.py:81 LZK/private/filters.py:107
+#: LZK/private/filters.py:28 LZK/private/filters.py:58
+#: LZK/private/filters.py:88 LZK/private/filters.py:116
 msgid "Apply"
 msgstr "Anwenden"
 
-#: LZK/private/filters.py:37 LZK/private/tables.py:28 LZK/private/tables.py:48
-#: LZK/private/tables.py:68
+#: LZK/private/filters.py:38 LZK/private/tables.py:26 LZK/private/tables.py:46
+#: LZK/private/tables.py:66
 msgid "Ability"
 msgstr "Fähigkeit"
 
-#: LZK/private/filters.py:38 LZK/private/filters.py:64
-#: LZK/private/filters.py:90
+#: LZK/private/filters.py:40 LZK/private/filters.py:70
+#: LZK/private/filters.py:98
 msgid "Comment"
 msgstr "Anmerkung"
 
-#: LZK/private/filters.py:63
+#: LZK/private/filters.py:68
 msgid "Symptom"
 msgstr "Symptom"
 
-#: LZK/private/filters.py:89
+#: LZK/private/filters.py:97
 msgid "Skill"
 msgstr "Fertigkeit"
 
@@ -49,8 +49,8 @@ msgstr "Fertigkeit"
 msgid "Comments"
 msgstr "Anmerkungen"
 
-#: LZK/private/tables.py:14 LZK/private/tables.py:33 LZK/private/tables.py:53
-#: LZK/private/tables.py:73
+#: LZK/private/tables.py:14 LZK/private/tables.py:31 LZK/private/tables.py:51
+#: LZK/private/tables.py:71
 msgid "Actions"
 msgstr "Aktionen"
 
@@ -100,10 +100,8 @@ msgstr "Zurück"
 
 #: LZK/private/templates/LZK/private/feedback/abilities.html:31
 #: LZK/private/templates/LZK/private/feedback/list.html:31
-#, fuzzy
-#| msgid "No requests for feedback have been created."
 msgid "No requests for feedback found."
-msgstr "Es wurden noch keine Anfragen für Anmerkungen erfasst"
+msgstr "Es wurden noch keine Anmerkungen zur Anfrage erfasst"
 
 #: LZK/private/templates/LZK/private/feedback/abilities.html:40
 #: LZK/private/templates/LZK/private/feedback/list.html:40
@@ -127,6 +125,9 @@ msgid ""
 "      Request for %(subject)s to %(university)s\n"
 "      "
 msgstr ""
+"\n"
+"      Anfrage zu %(subject)s für %(university)s\n"
+"      "
 
 #: LZK/private/templates/LZK/private/feedback/detail.html:33
 #, python-format
@@ -231,6 +232,6 @@ msgstr ""
 msgid "Excel import"
 msgstr "Excel Import"
 
-#: LZK/private/views.py:323
+#: LZK/private/views.py:330
 msgid "LZK: Request for feedback"
 msgstr "LZK: Anfrage für Rückmeldung"
