@@ -400,11 +400,11 @@ msgstr "Es wurden keine Symptome gefunden."
 
 #: LZK/templates/LZK/table.html:66
 msgid "previous"
-msgstr "weiter"
+msgstr "zurück"
 
 #: LZK/templates/LZK/table.html:86
 msgid "next"
-msgstr "zurück"
+msgstr "weiter"
 
 #: LZK/templates/registration/login.html:13
 msgid "Sign in"
