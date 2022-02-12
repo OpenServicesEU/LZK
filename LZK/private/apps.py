@@ -6,7 +6,7 @@ from .checks import check_email_from
 
 
 class LZKPrivateConfig(AppConfig):
-    name = "private"
+    name = "LZK.private"
     verbose_name = _("Lernzielkatalog (Private)")
 
     def ready(self):

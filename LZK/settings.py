@@ -57,6 +57,8 @@ INSTALLED_APPS = [
     "django_tables2",
     "haystack",
     "analytical",
+    "rest_framework",
+    "django_filters",
     "debug_toolbar",
 ]
 
@@ -167,6 +169,7 @@ SYSTEM_STATIC_PATHS = {
     "jquery/": ("/usr/share/javascript/jquery",),
     "popper/": ("/usr/share/nodejs/popper.js/dist/umd",),
     "ckeditor/": ("/usr/share/javascript/ckeditor",),
+    "flags/": ("/usr/share/iso-flags-svg/country-squared",),
 }
 
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
@@ -298,6 +301,14 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 DJANGO_TABLES2_TEMPLATE = "LZK/table.html"
+
+RQ_QUEUES = {}
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 100,
+}
 
 if "DJANGO_LOCAL_CONFIGURATION" in os.environ:
     filename = os.path.abspath(os.environ.get("DJANGO_LOCAL_CONFIGURATION"))

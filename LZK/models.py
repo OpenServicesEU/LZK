@@ -237,6 +237,7 @@ class Activity(models.Model):
 class Skill(models.Model):
     name = models.CharField(max_length=512, verbose_name=_("Name"))
     activity = models.ForeignKey("Activity", on_delete=models.CASCADE)
+    clinical_traineeship_checklist = models.BooleanField(default=False, verbose_name=_("Clinical traineeship checklist"))
 
     objects = PostgresManager()
 
@@ -413,3 +414,18 @@ class Text(OrderedModel):
 
     def __str__(self):
         return f"{self.title} ({self.placement})"
+
+
+class RoleModel(models.Model):
+    id = models.CharField(max_length=16, primary_key=True, verbose_name=_("Acronym"))
+    name = models.CharField(max_length=128, verbose_name=_("Name"))
+
+    class Meta:
+        verbose_name = _("Role model")
+        verbose_name_plural = _("Role models")
+        ordering = (
+            "name",
+        )
+
+    def __str__(self):
+        return self.name

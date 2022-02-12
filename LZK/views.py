@@ -13,9 +13,10 @@ from django.views.generic import DetailView, ListView, TemplateView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 from django_filters.views import FilterMixin, FilterView
 from django_tables2.views import SingleTableMixin
+from rest_framework import viewsets
 from haystack.generic_views import SearchView as BaseSearchView
 
-from . import filters, forms, models, tables
+from . import filters, forms, models, tables, serializers
 from .layout import IconButton
 
 logger = logging.getLogger(__name__)
@@ -439,3 +440,9 @@ class SkillCommentView(FeedbackTokenMixin, CommentMixin, UpdateView):
 class SearchView(BaseSearchView):
     template_name = "LZK/search.html"
     results_per_page = 10
+
+
+class SkillViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = models.Skill.objects.all()
+    serializer_class = serializers.SkillSerializer
+    filterset_fields = ['clinical_traineeship_checklist']
