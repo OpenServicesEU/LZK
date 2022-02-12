@@ -95,6 +95,8 @@ class SkillCommentInline(admin.TabularInline):
 
 @admin.register(models.Skill)
 class SkillAdmin(VersionAdmin):
+    list_display = ("name", "activity", "clinical_traineeship_checklist")
+    list_filter = ("clinical_traineeship_checklist",)
     search_fields = ("name",)
     inlines = (SkillCommentInline,)
 
