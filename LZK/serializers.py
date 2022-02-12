@@ -4,7 +4,7 @@ from . import models
 
 
 class SkillSerializer(serializers.HyperlinkedModelSerializer):
-    target = serializers.URLField(source="get_absolute_url")
+    target = serializers.SerializerMethodField()
 
     class Meta:
         model = models.Skill
@@ -12,3 +12,10 @@ class SkillSerializer(serializers.HyperlinkedModelSerializer):
         extra_kwargs = {
             'url': {'view_name': 'api:skill-detail'}
         }
+
+    def get_target(self, obj):
+        request = self.context.get("request")
+        path = obj.get_absolute_url()
+        if not request:
+            return path
+        return request._request.build_absolute_uri(path)
