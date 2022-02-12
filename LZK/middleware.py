@@ -6,7 +6,7 @@ class LanguageSelectorMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        language = request.GET.get('language')
+        language = request.GET.get("language")
         if language is not None:
             translation.activate(language)
             request.session[translation.LANGUAGE_SESSION_KEY] = language

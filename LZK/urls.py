@@ -12,7 +12,7 @@ from rest_framework import routers
 from . import forms, sitemaps, views
 
 router = routers.DefaultRouter()
-router.register(r'skills', views.SkillViewSet)
+router.register(r"skills", views.SkillViewSet)
 
 urlpatterns = [
     path(
@@ -81,7 +81,7 @@ urlpatterns = [
         views.SkillCommentView.as_view(),
         name="comment-skill",
     ),
-    path('api/', include((router.urls, "api"), namespace="api")),
+    path("api/", include((router.urls, "api"), namespace="api")),
     path("secure/", include("LZK.private.urls", namespace="private")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

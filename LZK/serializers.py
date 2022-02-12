@@ -8,10 +8,8 @@ class SkillSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = models.Skill
-        fields = ['url', 'name', "clinical_traineeship_checklist", 'target']
-        extra_kwargs = {
-            'url': {'view_name': 'api:skill-detail'}
-        }
+        fields = ["url", "name", "clinical_traineeship_checklist", "target"]
+        extra_kwargs = {"url": {"view_name": "api:skill-detail"}}
 
     def get_target(self, obj):
         request = self.context.get("request")
