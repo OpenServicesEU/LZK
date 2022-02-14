@@ -445,4 +445,9 @@ class SearchView(BaseSearchView):
 class SkillViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Skill.objects.all()
     serializer_class = serializers.SkillSerializer
-    filterset_fields = ["clinical_traineeship_checklist"]
+    filterset_fields = ["clinical_traineeship_checklist", "activity"]
+
+
+class ActivityViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = models.Activity.objects.all()
+    serializer_class = serializers.ActivitySerializer

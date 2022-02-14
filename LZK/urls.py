@@ -12,6 +12,7 @@ from rest_framework import routers
 from . import forms, sitemaps, views
 
 router = routers.DefaultRouter()
+router.register(r"activities", views.ActivityViewSet)
 router.register(r"skills", views.SkillViewSet)
 
 urlpatterns = [
