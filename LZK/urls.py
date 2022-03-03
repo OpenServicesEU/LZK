@@ -51,6 +51,7 @@ urlpatterns = [
     path("skills/", views.CompetenceLevelView.as_view(), name="skill-list"),
     path("skills/<int:pk>/", views.SkillDetailView.as_view(), name="skill-detail"),
     path("activities/<int:pk>/", views.ActivityView.as_view(), name="activity-detail"),
+    path("subjects/<str:slug>/", views.SubjectView.as_view(), name="subject-detail"),
     path("feedback/", views.FeedbackView.as_view(), name="feedback"),
     path(
         "feedback/subject/<str:pk>/abilities/",

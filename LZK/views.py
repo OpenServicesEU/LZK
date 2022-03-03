@@ -139,6 +139,26 @@ class SkillDetailView(DetailView):
     template_name = "LZK/skill/detail.html"
 
 
+class SubjectView(SingleTableMixin, SingleObjectMixin, FilterView):
+    model = models.Subject
+    table_class = tables.AbilityTable
+    template_name = "LZK/subject/list.html"
+    filterset_class = filters.AbilityFilter
+    paginate_by = 10
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        return super().get(request, *args, **kwargs)
+
+    def get_table_data(self):
+        return self.object.ability_set.all()
+
+    def get_filterset_kwargs(self, filterset_class):
+        kwargs = super().get_filterset_kwargs(filterset_class)
+        kwargs["queryset"] = self.object.ability_set.all()
+        return kwargs
+
+
 class FeedbackTokenMixin(UserPassesTestMixin):
     def test_func(self):
         token = self.request.GET.get("token", self.request.session.get("token"))

@@ -10,7 +10,7 @@ from django.db import models
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django_extensions.db.fields import RandomCharField
+from django_extensions.db.fields import RandomCharField, AutoSlugField
 from django_extensions.db.models import TimeStampedModel
 from markupfield.fields import MarkupField
 from ordered_model.models import OrderedModel
@@ -80,6 +80,7 @@ class Level(TimeStampedModel):
 class Subject(TimeStampedModel):
     id = models.CharField(max_length=128, primary_key=True, verbose_name=_("Acronym"))
     name = models.CharField(max_length=512, verbose_name=_("Name"))
+    slug = AutoSlugField(populate_from=["name"])
 
     objects = PostgresManager()
 
@@ -90,6 +91,9 @@ class Subject(TimeStampedModel):
 
     def __str__(self):
         return f"{self.name} ({self.id})"
+
+    def get_absolute_url(self):
+        return reverse('subject-detail', kwargs={'slug': self.slug})
 
 
 class System(models.Model):
