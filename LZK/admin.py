@@ -117,6 +117,12 @@ class SymptomAdmin(VersionAdmin):
     inlines = (SymptomCommentInline,)
 
 
+@admin.register(models.RoleModel)
+class RoleModelAdmin(VersionAdmin):
+    list_display = ("pk", "name")
+    search_fields = ("name",)
+
+
 @admin.register(models.Slide)
 class SlideAdmin(OrderedModelAdmin):
     list_display = ("title", "move_up_down_links")

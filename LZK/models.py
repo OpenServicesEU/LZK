@@ -171,6 +171,7 @@ class Ability(TimeStampedModel):
     )
     module_tracks = models.ManyToManyField("ModuleTrack", blank=True)
     public = models.BooleanField(default=False)
+    rolemodel = models.ForeignKey("RoleModel", blank=True, null=True, on_delete=models.SET_NULL)
 
     objects = PostgresManager()
 
@@ -425,6 +426,8 @@ class Text(OrderedModel):
 class RoleModel(models.Model):
     id = models.CharField(max_length=16, primary_key=True, verbose_name=_("Acronym"))
     name = models.CharField(max_length=128, verbose_name=_("Name"))
+
+    objects = PostgresManager()
 
     class Meta:
         verbose_name = _("Role model")

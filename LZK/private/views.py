@@ -73,6 +73,7 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
 
         objective_sheet = wb.get_sheet_by_name(settings.LZK_IMPORT_SHEET_OBJECTIVES)
         ability_data = list()
+        role_model_data = dict()
         level_data = dict()
         activity_data = dict()
         cl_data = dict()
@@ -89,7 +90,7 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
         symptom_data = list()
         symptom_subject_data = list()
         for row in islice(objective_sheet.iter_rows(), 1, None):
-            public = (row[13].value or "").strip().lower()
+            public = (row[15].value or "").strip().lower()
             if row[10].value.strip().lower() == settings.LZK_IMPORT_VALUE_TRUE.lower():
                 # Symptom
                 symptom_data.append(
@@ -126,10 +127,22 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                         {
                             "pk": row[0].value,
                             "name": row[1].value.strip(),
+                            "clinical_traineeship_checklist": row[12].value.strip().lower() == settings.LZK_IMPORT_VALUE_TRUE.lower() if row[12].value else False,
                         }
                     )
                     skill_activity_map[row[0].value] = act
             else:
+                # Role model
+                if row[14].value:
+                    rm = row[14].value.strip()
+                    if rm.upper() not in role_model_data:
+                        role_model_data[rm.upper()] = {
+                            "name": acronyms.get(rm.upper(), rm)
+                        }
+                else:
+                    rm = None
+
+                # Ability
                 ability_data.append(
                     {
                         "pk": row[0].value,
@@ -138,6 +151,7 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                         "subject_related": row[9].value.strip().lower()
                         == settings.LZK_IMPORT_VALUE_TRUE.lower(),
                         "public": public == settings.LZK_IMPORT_VALUE_TRUE.lower(),
+                        "rolemodel_id": rm,
                     }
                 )
                 # Levels
@@ -161,8 +175,8 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                             {"ability_id": row[0].value, "subject_id": s.upper()}
                         )
                 # Systems
-                if row[12].value:
-                    for s in map(lambda s: s.strip(), row[12].value.split(",")):
+                if row[13].value:
+                    for s in map(lambda s: s.strip(), row[13].value.split(",")):
                         if s.upper() not in system_data:
                             system_data[s.upper()] = {
                                 "name": acronyms.get(s.upper(), s)
@@ -171,35 +185,40 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                             {"ability_id": row[0].value, "system_id": s.upper()}
                         )
                 # UFIDs
-                if row[15].value:
-                    if isinstance(row[15].value, int):
-                        values = [row[15].value]
-                    elif isinstance(row[15].value, float):
+                if row[17].value:
+                    if isinstance(row[17].value, int):
+                        values = [row[17].value]
+                    elif isinstance(row[17].value, float):
                         values = map(
                             lambda u: int(u.strip()),
-                            filter(bool, str(row[15].value).split(".")),
+                            filter(bool, str(row[17].value).split(".")),
                         )
                     else:
                         values = map(
                             lambda u: int(u.strip()),
-                            filter(bool, row[15].value.split(",")),
+                            filter(bool, row[17].value.split(",")),
                         )
                     for u in values:
                         ability_ufid_data.append(
                             {"ability_id": row[0].value, "ufid_id": u}
                         )
                 # Study field
-                if row[16].value:
-                    sf = row[16].value.strip()
+                if row[18].value:
+                    sf = row[18].value.strip()
                     if sf.upper() not in study_field_data:
                         study_field_data[sf.upper()] = {
                             "name": acronyms.get(sf.upper(), sf)
                         }
                     ability_study_field_data[row[0].value] = sf.upper()
 
+
         models.StudyField.objects.on_conflict(
             ["pk"], ConflictAction.UPDATE
         ).bulk_insert(({**v, **{"pk": k}} for k, v in study_field_data.items()))
+
+        models.RoleModel.objects.on_conflict(
+            ["pk"], ConflictAction.UPDATE
+        ).bulk_insert(({**v, **{"pk": k}} for k, v in role_model_data.items()))
 
         ability_data_update = [
             {
@@ -258,10 +277,10 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
         )
 
         with postgres_manager(models.Ability.subjects.through) as manager:
-            manager.get_queryset().bulk_insert(ability_subject_data)
+            manager.get_queryset().on_conflict(["ability_id", "subject_id"], ConflictAction.UPDATE).bulk_insert(ability_subject_data)
 
         with postgres_manager(models.Symptom.subjects.through) as manager:
-            manager.get_queryset().bulk_insert(symptom_subject_data)
+            manager.get_queryset().on_conflict(["symptom_id", "subject_id"], ConflictAction.UPDATE).bulk_insert(symptom_subject_data)
 
         models.Level.objects.on_conflict(["pk"], ConflictAction.UPDATE).bulk_insert(
             ({**v, **{"pk": k}} for k, v in level_data.items())
@@ -274,19 +293,19 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
         #    ability__pk__in=pks
         # ).delete()
         with postgres_manager(models.Ability.levels.through) as manager:
-            manager.get_queryset().bulk_insert(ability_level_data)
+            manager.get_queryset().on_conflict(["ability_id", "level_id"], ConflictAction.UPDATE).bulk_insert(ability_level_data)
 
         # models.Ability.systems.through.objects.filter(
         #    ability__pk__in=pks
         # ).delete()
         with postgres_manager(models.Ability.systems.through) as manager:
-            manager.get_queryset().bulk_insert(ability_system_data)
+            manager.get_queryset().on_conflict(["ability_id", "system_id"], ConflictAction.UPDATE).bulk_insert(ability_system_data)
 
         # models.Ability.ufids.through.objects.filter(
         #    ability__pk__in=pks
         # ).delete()
         with postgres_manager(models.Ability.ufids.through) as manager:
-            manager.get_queryset().bulk_insert(ability_ufid_data)
+            manager.get_queryset().on_conflict(["ability_id", "ufid_id"], ConflictAction.UPDATE).bulk_insert(ability_ufid_data)
 
         return super().form_valid(form)
 
