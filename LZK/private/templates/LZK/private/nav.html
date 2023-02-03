@@ -1,4 +1,8 @@
 {% load i18n %}
+<a class="dropdown-item" href="{% url "private:ability-filter" %}">
+  <i class="fa fa-filter" aria-hidden="true"></i>
+  {% trans "Filtered abilities" %}
+</a>
 {% if perms.LZK.view_feedback %}
 <a class="dropdown-item" href="{% url "private:feedback-list" %}">
   <i class="fa fa-commenting-o" aria-hidden="true"></i>

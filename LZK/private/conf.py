@@ -9,6 +9,7 @@ class LZKPrivateAppConf(AppConf):
     IMPORT_VALUE_TRUE = "ja"
     IMPORT_VALUE_FALSE = "nein"
     EMAIL_FROM = None
+    FERNET_KEY = b""
 
     class Meta:
         prefix = "LZK"

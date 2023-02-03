@@ -1,12 +1,15 @@
 import logging
+import json
 from itertools import islice
 
 from braces.views import SuperuserRequiredMixin
 from crispy_forms.bootstrap import FormActions, StrictButton
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import ButtonHolder, Fieldset, Layout, Submit
+from cryptography.fernet import Fernet
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.mail import EmailMultiAlternatives
+from django.db.models import Model
 from django.http import HttpResponseNotAllowed, HttpResponseRedirect
 from django.template import Context
 from django.template.loader import get_template
@@ -28,7 +31,9 @@ from psqlextra.query import ConflictAction
 from psqlextra.util import postgres_manager
 
 from .. import models
+from ..filters import AbilityExtendedFilter
 from ..mixins import FilterFormHelperMixin
+from ..utils import ModelJSONEncoder
 from . import filters, forms, tables
 from .conf import settings
 
@@ -374,6 +379,18 @@ class CloseFeedbackView(
         obj.save()
         url = reverse("private:feedback-list")
         return HttpResponseRedirect(url)
+
+
+class AbilityFilterView(LoginRequiredMixin, FormView):
+    template_name = "LZK/private/ability/filter.html"
+
+    def get_form(self):
+        return AbilityExtendedFilter(self.request.POST, queryset=models.Ability.objects.filter(public=True)).form
+
+    def form_valid(self, form):
+        payload = Fernet(settings.LZK_FERNET_KEY).encrypt(ModelJSONEncoder().encode(form.cleaned_data).encode("utf-8"))
+        return HttpResponseRedirect(reverse("ability-filtered", kwargs={"payload": payload.decode("ascii")}))
+
 
 
 class AbilityCommentView(

@@ -1,8 +1,10 @@
 import logging
+import json
 
 from crispy_forms.bootstrap import FormActions, StrictButton
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout
+from cryptography.fernet import Fernet, InvalidToken
 from django.contrib.auth.mixins import UserPassesTestMixin
 from django.db.models import Count, Q
 from django.http import Http404
@@ -16,6 +18,7 @@ from django_tables2.views import SingleTableMixin
 from rest_framework import viewsets
 from haystack.generic_views import SearchView as BaseSearchView
 
+from .conf import settings
 from . import filters, forms, models, tables, serializers
 from .layout import IconButton
 
@@ -44,6 +47,21 @@ class AboutView(TemplateView):
         context = super().get_context_data(**kwargs)
         context["texts"] = models.Text.objects.filter(placement=models.Text.ABOUT)
         return context
+
+
+class AbilityFilteredView(SingleTableMixin, ListView):
+    model = models.Ability
+    table_class = tables.AbilityTable
+    template_name = "LZK/ability/filtered.html"
+    paginate_by = 10
+
+    def get_queryset(self):
+        try:
+            payload = json.loads(Fernet(settings.LZK_FERNET_KEY).decrypt(self.kwargs.get("payload")))
+        except (InvalidToken, json.JSONDecodeError):
+            return super().get_queryset().none()
+        f = filters.AbilityExtendedFilter(payload, queryset=super().get_queryset())
+        return f.qs
 
 
 class AbilityListView(SingleTableMixin, FilterView):

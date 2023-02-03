@@ -1,0 +1,15 @@
+{% extends "LZK/content.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<main role="main" class="container">
+<h1>{% trans "Filter abilities" %}</h1>
+<div class="card">
+  <div class="card-body">
+    {% crispy form %}
+  </div>
+</div>
+</main>
+{% endblock %}
