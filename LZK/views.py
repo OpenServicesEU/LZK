@@ -58,7 +58,7 @@ class AbilityFilteredView(SingleTableMixin, ListView):
     def get_queryset(self):
         try:
             payload = json.loads(
-                Fernet(settings.LZK_FERNET_KEY).decrypt(self.kwargs.get("payload"))
+                Fernet(settings.LZK_FERNET_KEY).decrypt(self.kwargs.get("payload").encode("ascii"))
             )
         except (InvalidToken, json.JSONDecodeError):
             return super().get_queryset().none()
