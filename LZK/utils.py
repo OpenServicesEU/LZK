@@ -2,6 +2,7 @@ import json
 from base64 import urlsafe_b64encode
 from pathlib import PurePosixPath
 from uuid import uuid4
+
 from django.db import models
 
 
@@ -14,9 +15,7 @@ class Uuid4Upload(str):
 
 
 class ModelJSONEncoder(json.JSONEncoder):
-
     def default(self, o):
         if isinstance(o, models.Model):
             return o.pk
         return super().default(o)
-

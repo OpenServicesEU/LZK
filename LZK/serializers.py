@@ -23,7 +23,6 @@ class SkillSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class ActivitySerializer(serializers.HyperlinkedModelSerializer):
-
     class Meta:
         model = models.Activity
         fields = ["url", "name"]

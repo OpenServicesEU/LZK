@@ -1,5 +1,5 @@
-import logging
 import json
+import logging
 
 from crispy_forms.bootstrap import FormActions, StrictButton
 from crispy_forms.helper import FormHelper
@@ -15,11 +15,11 @@ from django.views.generic import DetailView, ListView, TemplateView, UpdateView
 from django.views.generic.detail import SingleObjectMixin
 from django_filters.views import FilterMixin, FilterView
 from django_tables2.views import SingleTableMixin
-from rest_framework import viewsets
 from haystack.generic_views import SearchView as BaseSearchView
+from rest_framework import viewsets
 
+from . import filters, forms, models, serializers, tables
 from .conf import settings
-from . import filters, forms, models, tables, serializers
 from .layout import IconButton
 
 logger = logging.getLogger(__name__)
@@ -57,7 +57,9 @@ class AbilityFilteredView(SingleTableMixin, ListView):
 
     def get_queryset(self):
         try:
-            payload = json.loads(Fernet(settings.LZK_FERNET_KEY).decrypt(self.kwargs.get("payload")))
+            payload = json.loads(
+                Fernet(settings.LZK_FERNET_KEY).decrypt(self.kwargs.get("payload"))
+            )
         except (InvalidToken, json.JSONDecodeError):
             return super().get_queryset().none()
         f = filters.AbilityExtendedFilter(payload, queryset=super().get_queryset())

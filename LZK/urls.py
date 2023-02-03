@@ -40,7 +40,11 @@ urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
     path("about/", views.AboutView.as_view(), name="about"),
     path("search/", views.SearchView.as_view(), name="search"),
-    path("abilities/filtered/<str:payload>", views.AbilityFilteredView.as_view(), name="ability-filtered"),
+    path(
+        "abilities/filtered/<str:payload>",
+        views.AbilityFilteredView.as_view(),
+        name="ability-filtered",
+    ),
     path("abilities/", views.AbilityListView.as_view(), name="ability-list"),
     path(
         "abilities/<str:pk>/", views.AbilityDetailView.as_view(), name="ability-detail"

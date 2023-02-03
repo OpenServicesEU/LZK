@@ -1,8 +1,8 @@
 import logging
-import magic
-import mimeparse
 from uuid import uuid4
 
+import magic
+import mimeparse
 from django.contrib.auth.models import AbstractUser
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
@@ -10,7 +10,7 @@ from django.db import models
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django_extensions.db.fields import RandomCharField, AutoSlugField
+from django_extensions.db.fields import AutoSlugField, RandomCharField
 from django_extensions.db.models import TimeStampedModel
 from markupfield.fields import MarkupField
 from ordered_model.models import OrderedModel
@@ -93,7 +93,7 @@ class Subject(TimeStampedModel):
         return f"{self.name} ({self.id})"
 
     def get_absolute_url(self):
-        return reverse('subject-detail', kwargs={'slug': self.slug})
+        return reverse("subject-detail", kwargs={"slug": self.slug})
 
 
 class System(models.Model):
@@ -171,7 +171,9 @@ class Ability(TimeStampedModel):
     )
     module_tracks = models.ManyToManyField("ModuleTrack", blank=True)
     public = models.BooleanField(default=False)
-    rolemodel = models.ForeignKey("RoleModel", blank=True, null=True, on_delete=models.SET_NULL)
+    rolemodel = models.ForeignKey(
+        "RoleModel", blank=True, null=True, on_delete=models.SET_NULL
+    )
 
     objects = PostgresManager()
 

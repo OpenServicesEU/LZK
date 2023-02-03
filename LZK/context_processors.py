@@ -1,5 +1,5 @@
-from .conf import settings
 from . import models
+from .conf import settings
 
 
 def login_url(request):

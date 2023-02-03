@@ -30,7 +30,9 @@ class AbilityExtendedFilter(django_filters.FilterSet):
         helper.layout = Layout(
             *form.fields.keys(),
             FormActions(
-                StrictButton(_("Generate public URL"), type="submit", css_class="btn btn-primary"),
+                StrictButton(
+                    _("Generate public URL"), type="submit", css_class="btn btn-primary"
+                ),
                 css_class="d-flex flex-row-reverse",
             )
         )

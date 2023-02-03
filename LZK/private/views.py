@@ -1,5 +1,5 @@
-import logging
 import json
+import logging
 from itertools import islice
 
 from braces.views import SuperuserRequiredMixin
@@ -132,7 +132,12 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                         {
                             "pk": row[0].value,
                             "name": row[1].value.strip(),
-                            "clinical_traineeship_checklist": row[12].value.strip().lower() == settings.LZK_IMPORT_VALUE_TRUE.lower() if row[12].value else False,
+                            "clinical_traineeship_checklist": row[12]
+                            .value.strip()
+                            .lower()
+                            == settings.LZK_IMPORT_VALUE_TRUE.lower()
+                            if row[12].value
+                            else False,
                         }
                     )
                     skill_activity_map[row[0].value] = act
@@ -216,14 +221,13 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                         }
                     ability_study_field_data[row[0].value] = sf.upper()
 
-
         models.StudyField.objects.on_conflict(
             ["pk"], ConflictAction.UPDATE
         ).bulk_insert(({**v, **{"pk": k}} for k, v in study_field_data.items()))
 
-        models.RoleModel.objects.on_conflict(
-            ["pk"], ConflictAction.UPDATE
-        ).bulk_insert(({**v, **{"pk": k}} for k, v in role_model_data.items()))
+        models.RoleModel.objects.on_conflict(["pk"], ConflictAction.UPDATE).bulk_insert(
+            ({**v, **{"pk": k}} for k, v in role_model_data.items())
+        )
 
         ability_data_update = [
             {
@@ -282,10 +286,14 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
         )
 
         with postgres_manager(models.Ability.subjects.through) as manager:
-            manager.get_queryset().on_conflict(["ability_id", "subject_id"], ConflictAction.UPDATE).bulk_insert(ability_subject_data)
+            manager.get_queryset().on_conflict(
+                ["ability_id", "subject_id"], ConflictAction.UPDATE
+            ).bulk_insert(ability_subject_data)
 
         with postgres_manager(models.Symptom.subjects.through) as manager:
-            manager.get_queryset().on_conflict(["symptom_id", "subject_id"], ConflictAction.UPDATE).bulk_insert(symptom_subject_data)
+            manager.get_queryset().on_conflict(
+                ["symptom_id", "subject_id"], ConflictAction.UPDATE
+            ).bulk_insert(symptom_subject_data)
 
         models.Level.objects.on_conflict(["pk"], ConflictAction.UPDATE).bulk_insert(
             ({**v, **{"pk": k}} for k, v in level_data.items())
@@ -298,19 +306,25 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
         #    ability__pk__in=pks
         # ).delete()
         with postgres_manager(models.Ability.levels.through) as manager:
-            manager.get_queryset().on_conflict(["ability_id", "level_id"], ConflictAction.UPDATE).bulk_insert(ability_level_data)
+            manager.get_queryset().on_conflict(
+                ["ability_id", "level_id"], ConflictAction.UPDATE
+            ).bulk_insert(ability_level_data)
 
         # models.Ability.systems.through.objects.filter(
         #    ability__pk__in=pks
         # ).delete()
         with postgres_manager(models.Ability.systems.through) as manager:
-            manager.get_queryset().on_conflict(["ability_id", "system_id"], ConflictAction.UPDATE).bulk_insert(ability_system_data)
+            manager.get_queryset().on_conflict(
+                ["ability_id", "system_id"], ConflictAction.UPDATE
+            ).bulk_insert(ability_system_data)
 
         # models.Ability.ufids.through.objects.filter(
         #    ability__pk__in=pks
         # ).delete()
         with postgres_manager(models.Ability.ufids.through) as manager:
-            manager.get_queryset().on_conflict(["ability_id", "ufid_id"], ConflictAction.UPDATE).bulk_insert(ability_ufid_data)
+            manager.get_queryset().on_conflict(
+                ["ability_id", "ufid_id"], ConflictAction.UPDATE
+            ).bulk_insert(ability_ufid_data)
 
         return super().form_valid(form)
 
@@ -385,12 +399,17 @@ class AbilityFilterView(LoginRequiredMixin, FormView):
     template_name = "LZK/private/ability/filter.html"
 
     def get_form(self):
-        return AbilityExtendedFilter(self.request.POST, queryset=models.Ability.objects.filter(public=True)).form
+        return AbilityExtendedFilter(
+            self.request.POST, queryset=models.Ability.objects.filter(public=True)
+        ).form
 
     def form_valid(self, form):
-        payload = Fernet(settings.LZK_FERNET_KEY).encrypt(ModelJSONEncoder().encode(form.cleaned_data).encode("utf-8"))
-        return HttpResponseRedirect(reverse("ability-filtered", kwargs={"payload": payload.decode("ascii")}))
-
+        payload = Fernet(settings.LZK_FERNET_KEY).encrypt(
+            ModelJSONEncoder().encode(form.cleaned_data).encode("utf-8")
+        )
+        return HttpResponseRedirect(
+            reverse("ability-filtered", kwargs={"payload": payload.decode("ascii")})
+        )
 
 
 class AbilityCommentView(
