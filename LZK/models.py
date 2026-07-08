@@ -415,9 +415,8 @@ class Text(OrderedModel):
         choices=PLACEMENT_CHOICES,
         default=ABILITIES,
     )
-    order_with_respect_to = "placement"
 
-    class Meta:
+    class Meta(OrderedModel.Meta):
         verbose_name = _("Text")
         verbose_name_plural = _("Texts")
 
