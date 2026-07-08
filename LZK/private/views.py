@@ -132,12 +132,12 @@ class ImportView(LoginRequiredMixin, SuperuserRequiredMixin, FormView):
                         {
                             "pk": row[0].value,
                             "name": row[1].value.strip(),
-                            "clinical_traineeship_checklist": row[12]
-                            .value.strip()
-                            .lower()
-                            == settings.LZK_IMPORT_VALUE_TRUE.lower()
-                            if row[12].value
-                            else False,
+                            "clinical_traineeship_checklist": (
+                                row[12].value.strip().lower()
+                                == settings.LZK_IMPORT_VALUE_TRUE.lower()
+                                if row[12].value
+                                else False
+                            ),
                         }
                     )
                     skill_activity_map[row[0].value] = act
