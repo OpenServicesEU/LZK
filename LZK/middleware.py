@@ -1,5 +1,7 @@
 from django.utils import translation
 
+from .conf import settings
+
 
 class LanguageSelectorMiddleware:
     def __init__(self, get_response):
