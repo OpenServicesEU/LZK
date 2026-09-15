@@ -7,8 +7,8 @@ class LanguageSelectorMiddleware:
 
     def __call__(self, request):
         language = request.GET.get("language")
+        response = self.get_response(request)
         if language is not None:
             translation.activate(language)
-            request.session[translation.LANGUAGE_SESSION_KEY] = language
-        response = self.get_response(request)
+            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language)
         return response
