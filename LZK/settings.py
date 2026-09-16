@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "psqlextra",
     "compressor",
     "crispy_forms",
+    "crispy_bootstrap4",
     "django_extensions",
     "djangosaml2",
     "guardian",
